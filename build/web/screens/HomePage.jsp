@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ShopLite - Simple eCommerce Website Template</title>
+    <title>TECHSTORE</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -97,50 +97,9 @@
       </symbol>
     </svg>
 
-    <div class="preloader-container">
-      <div class="preloader-text">
-        <span>S</span><span>H</span><span>O</span><span>P</span><span>L</span><span>I</span><span>T</span><span>E</span>
-      </div>
-    </div>
+    <jsp:include page="../common/header.jsp"></jsp:include>
 
-    <div class="search-popup">
-        <div class="search-popup-container">
-
-          <form role="search" method="get" class="search-form" action="">
-            <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="s" />
-            <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
-          </form>
-
-          <h5 class="cat-list-title">Browse Categories</h5>
-          
-          <ul class="cat-list">
-            <li class="cat-list-item">
-              <a href="#" title="Mobile Phones">Mobile Phones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Smart Watches">Smart Watches</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Headphones">Headphones</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Accessories">Accessories</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Monitors">Monitors</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Speakers">Speakers</a>
-            </li>
-            <li class="cat-list-item">
-              <a href="#" title="Memory Cards">Memory Cards</a>
-            </li>
-          </ul>
-
-        </div>
-    </div>
-    
-    <header id="header" class="site-header">
+<!--    <header id="header" class="site-header">
 
       <div class="top-info border-bottom d-none d-md-block">
         <div class="container-fluid">
@@ -187,7 +146,7 @@
                   <a class="nav-link me-4" href="shop.html">Shop</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="blog.html">Blogs</a>
+                  <a class="nav-link me-4" href="screens/Blog.jsp">Blogs</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
@@ -221,9 +180,6 @@
                 <li class="nav-item">
                   <a class="nav-link me-4" href="contact.html">Contact</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link text-decoration-underline me-4" href="https://templatesjungle.gumroad.com/l/shoplite-simple-ecommerce-bootstrap-html-css-website-template" target="_blank">Get Pro</a>
-                </li>
               </ul>
               <div class="user-items d-flex">
                 <ul class="d-flex justify-content-end list-unstyled mb-0">
@@ -240,7 +196,7 @@
                         <use xlink:href="#user"></use>
                       </svg>
                     </a>
-                    <!-- Modal -->
+                     Modal 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -458,7 +414,7 @@
           </div>
         </div>
       </div>
-    </section>
+        </section>-->
 
     <section id="company-services" class="padding-large">
       <div class="container">
@@ -1126,7 +1082,7 @@
         </div>
         <div class="row">
           <div class="col-md-3 posts mb-4">
-            <a href="blog.html" class="btn rounded-0 py-0 px-2">Gadgets</a>
+            <a href="./blogs" class="btn rounded-0 py-0 px-2">Gadgets</a>
             <img src="images/post-item1.jpg" alt="post image" class="img-fluid">
             <h4 class="card-title mt-3 mb-2 text-uppercase text-dark"><a href="single-post.html">5 Must-Have Gadgets for the Modern Home</a></h4>
             <p class="mb-2">Dive into the world of cutting-edge technology with our latest blog post, where we highlight five essential gadg</p>
@@ -1261,140 +1217,7 @@
       </div>
     </section>
 
-    <footer id="footer" class="overflow-hidden">
-      <div class="container">
-        <div class="row">
-          <div class="footer-top-area">
-            <div class="row d-flex flex-wrap justify-content-between">
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu">
-                  <img src="images/main-logo.png" alt="logo" class="img-fluid mb-2">
-                  <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p>
-                  <div class="social-links">
-                    <ul class="d-flex list-unstyled">
-                      <li>
-                        <a href="#">
-                          <svg class="facebook">
-                            <use xlink:href="#facebook" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="instagram">
-                            <use xlink:href="#instagram" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="twitter">
-                            <use xlink:href="#twitter" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="linkedin">
-                            <use xlink:href="#linkedin" />
-                          </svg>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <svg class="youtube">
-                            <use xlink:href="#youtube" />
-                          </svg>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6 pb-3">
-                <div class="footer-menu text-uppercase">
-                  <h5 class="widget-title pb-2">Quick Links</h5>
-                  <ul class="menu-list list-unstyled text-uppercase">
-                    <li class="menu-item mb-1">
-                      <a href="#">Home</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">About</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shop</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Blogs</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu text-uppercase">
-                  <h5 class="widget-title pb-2">Help & Info Help</h5>
-                  <ul class="menu-list list-unstyled">
-                    <li class="menu-item mb-1">
-                      <a href="#">Track Your Order</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Returns Policies</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Shipping + Delivery</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Contact Us</a>
-                    </li>
-                    <li class="menu-item mb-1">
-                      <a href="#">Faqs</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6 pb-3">
-                <div class="footer-menu contact-item">
-                  <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
-                  <p>Do you have any queries or suggestions? <a href="mailto:" class="text-decoration-underline">yourinfo@gmail.com</a></p>
-                  <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222 333 44</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <hr>
-    <div id="footer-bottom" class="mb-2">
-      <div class="container">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="ship-and-payment d-flex gap-md-5 flex-wrap">
-            <div class="shipping d-flex">
-              <p>We ship with:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/dhl.png" alt="visa">
-                <img src="images/shippingcard.png" alt="mastercard">
-              </div>
-            </div>
-            <div class="payment-method d-flex">
-              <p>Payment options:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/visa.jpg" alt="visa">
-                <img src="images/mastercard.jpg" alt="mastercard">
-                <img src="images/paypal.jpg" alt="paypal">
-              </div>
-            </div>            
-          </div>
-          <div class="copyright">
-            <p>© Copyright 2024 ShopLite. HTML Template by <a href="https://templatesjungle.com/" target="_blank">TemplatesJungle</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
     
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

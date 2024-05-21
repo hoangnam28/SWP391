@@ -1,0 +1,113 @@
+/* blog.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.main-content {
+    flex: 3;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#blog-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-item {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.blog-item img {
+    width: 150px; /* Set the width for the thumbnail */
+    height: 100px; /* Set the height for the thumbnail */
+    object-fit: cover; /* Ensures the image covers the specified dimensions without stretching */
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.blog-item h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.blog-item p {
+    margin: 5px 0 0 0;
+    color: #666;
+}
+
+#pagination {
+    margin-top: 20px;
+}
+
+#pagination a {
+    text-decoration: none;
+}
+
+#pagination button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination button[disabled] {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.sidebarblog {
+    flex: 1;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-box-blog, .categories, .latest-posts, .contacts {
+    margin-bottom: 20px;
+}
+
+.search-box-blog input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.categories ul, .latest-posts ul, .contacts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories ul li, .latest-posts ul li, .contacts ul li {
+    margin-bottom: 10px;
+}
+
+.categories ul li a, .latest-posts ul li a, .contacts ul li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.categories ul li a:hover, .latest-posts ul li a:hover, .contacts ul li a:hover {
+    text-decoration: underline;
+}

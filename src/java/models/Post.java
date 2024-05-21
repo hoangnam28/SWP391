@@ -4,10 +4,6 @@
  */
 package models;
 
-/**
- *
- * @author YOUR NAM
- */
 import java.sql.Timestamp;
 
 public class Post {
@@ -17,20 +13,23 @@ public class Post {
     private String briefInfo;
     private String details;
     private int authorId;
-    private String category;
+    private int categoryId;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
     // Constructors
     public Post() {}
 
-    public Post(String title, String thumbnail, String briefInfo, String details, int authorId, String category) {
+    public Post(int id, String title, String thumbnail, String briefInfo, String details, int authorId, int categoryId, Timestamp createdAt, Timestamp updatedAt) {
+        this.id = id;
         this.title = title;
         this.thumbnail = thumbnail;
         this.briefInfo = briefInfo;
         this.details = details;
         this.authorId = authorId;
-        this.category = category;
+        this.categoryId = categoryId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     // Getters and Setters
@@ -82,12 +81,12 @@ public class Post {
         this.authorId = authorId;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Timestamp getCreatedAt() {
@@ -115,7 +114,7 @@ public class Post {
                 ", briefInfo='" + briefInfo + '\'' +
                 ", details='" + details + '\'' +
                 ", authorId=" + authorId +
-                ", category='" + category + '\'' +
+                ", categoryId=" + categoryId +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

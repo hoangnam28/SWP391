@@ -17,7 +17,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response); // Đảm bảo tên tệp là chính xác
+        request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response); // Đảm bảo tên tệp là chính xác
     } 
 
     @Override
@@ -27,6 +27,6 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp); // Xử lý yêu cầu GET
+        processRequest(req, resp); 
     }
 }

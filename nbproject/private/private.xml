@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP_Projectnew/SWP_new/src/java/models/Setting.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/src/java/daos/context/DBContext.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/src/java/models/Slider.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/src/java/models/OrderAssigment.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/HomePage.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/search.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/Blog.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/css/blog.css</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/PostDetailsController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/css/style.css</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/BlogDetails.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/PostController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/PostDao.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/Post.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/header.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/css/blogDetails.css</file>
         </group>
     </open-files>
 </project-private>

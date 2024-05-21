@@ -1,0 +1,92 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 21, 2024, 1:36:29 PM
+    Author     : YOUR NAM
+*/
+
+/* postDetails.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.main-content {
+    flex: 3;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-item {
+    margin-bottom: 20px;
+}
+
+.thumbnail {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.post-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.post-details {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.sidebar {
+    flex: 1;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-box, .categories, .latest-posts, .contacts {
+    margin-bottom: 20px;
+}
+
+.search-box input, .search-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.categories ul, .latest-posts ul, .contacts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories ul li, .latest-posts ul li, .contacts ul li {
+    margin-bottom: 10px;
+}
+
+.categories ul li a, .latest-posts ul li a, .contacts ul li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.categories ul li a:hover, .latest-posts ul li a:hover, .contacts ul li a:hover {
+    text-decoration: underline;
+}
