@@ -83,7 +83,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-box-blog, .categories, .latest-posts, .contacts {
+.search-box-blog, .categories, .latest-blog, .contacts-blog {
     margin-bottom: 20px;
 }
 
@@ -94,20 +94,31 @@ body {
     border: 1px solid #ddd;
 }
 
-.categories ul, .latest-posts ul, .contacts ul {
+.categories-blog ul, .latest-blog ul, .contacts-blog ul {
     list-style-type: none;
     padding: 0;
 }
 
-.categories ul li, .latest-posts ul li, .contacts ul li {
+.categories-blog ul li, .latest-blog ul li, .contacts-blog ul li {
     margin-bottom: 10px;
 }
 
-.categories ul li a, .latest-posts ul li a, .contacts ul li a {
+.categories-blog ul li a, .latest-blog ul li a, .contacts-blog ul li a {
     text-decoration: none;
     color: #007bff;
 }
 
-.categories ul li a:hover, .latest-posts ul li a:hover, .contacts ul li a:hover {
+.categories-blog ul li a:hover, .latest-blog ul li a:hover, .contacts-blog ul li a:hover {
     text-decoration: underline;
+}
+/* CSS */
+
+
+/* Thiết lập kích thước cho hình ảnh thumbnail */
+.latest-blog img {
+    border: solid #000;
+    width: 50%; /* Chiều rộng là 100% của phần tử cha (li) */
+    height: auto; /* Chiều cao tự động để duy trì tỷ lệ khung hình */
+    max-height: 100px; /* Chiều cao tối đa là 100px (hoặc kích thước mong muốn) */
+    border-radius: 8px; /* Bo tròn góc */
 }
