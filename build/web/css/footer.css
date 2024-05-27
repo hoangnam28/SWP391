@@ -1,0 +1,31 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 22, 2024, 9:57:39 PM
+    Author     : YOUR NAM
+*/
+/* 4.9 Footer
+/*----------------------------------------------*/
+#footer .menu-list .menu-item a{
+  font-size: 0.7619em;
+  font-weight: 300;
+  letter-spacing: 0.09em;
+  color: var(--black-color);
+}
+#footer .menu-list .menu-item a:hover{
+  color: var(--primary-color);
+}
+.social-links svg {
+  width: 20px;
+  height: 20px;
+  transition: 0.3s ease-in-out;
+  color: var(--light-gray-color);
+}
+.social-links svg:hover {
+  color: var(--primary-color);
+}
+.social-links li {
+  padding-right: 30px;
+}

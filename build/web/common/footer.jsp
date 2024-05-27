@@ -5,6 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+    </head>
 <footer id="footer" class="overflow-hidden">
       <div class="container">
         <div class="row">
@@ -12,7 +17,7 @@
             <div class="row d-flex flex-wrap justify-content-between">
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu">
-                  <img src="images/main-logo.png" alt="logo" class="img-fluid mb-2">
+                  <img src="images/logo.png" alt="logo" class="img-fluid mb-2">
                   <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p>
                   <div class="social-links">
                     <ul class="d-flex list-unstyled">
@@ -60,7 +65,7 @@
                   <h5 class="widget-title pb-2">Quick Links</h5>
                   <ul class="menu-list list-unstyled text-uppercase">
                     <li class="menu-item mb-1">
-                      <a href="#">Home</a>
+                      <a href="./home_page">Home</a>
                     </li>
                     <li class="menu-item mb-1">
                       <a href="#">About</a>
@@ -69,7 +74,7 @@
                       <a href="#">Shop</a>
                     </li>
                     <li class="menu-item mb-1">
-                      <a href="#">Blogs</a>
+                      <a href="./blogs">Blogs</a>
                     </li>
                     <li class="menu-item mb-1">
                       <a href="#">Contact</a>
@@ -102,8 +107,8 @@
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu contact-item">
                   <h5 class="widget-title text-uppercase pb-2">Contact Us</h5>
-                  <p>Do you have any queries or suggestions? <a href="mailto:" class="text-decoration-underline">yourinfo@gmail.com</a></p>
-                  <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">+55 111 222 333 44</a></p>
+                  <p>Do you have any queries or suggestions? <a href="mailto:" class="text-decoration-underline">hoangnam28102002@gmail.com</a></p>
+                  <p>If you need support? Just give us a call. <a href="#" class="text-decoration-underline">(84+)98888886</a></p>
                 </div>
               </div>
             </div>
@@ -133,7 +138,7 @@
             </div>            
           </div>
           <div class="copyright">
-            <p>© Copyright 2024 ShopLite. HTML Template by <a href="https://templatesjungle.com/" target="_blank">TemplatesJungle</a>
+            <p>© Copyright 2024 TechStore.G6
             </p>
           </div>
         </div>

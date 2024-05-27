@@ -22,17 +22,8 @@ public class PostDao extends DBContext<Post> {
 
     @Override
     public List<Post> findAll() {
-        List<Post> posts = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM posts")) {
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                Post post = mapResultSetToPost(rs);
-                posts.add(post);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return posts;
+
+        return null;
     }
 
     @Override
@@ -104,18 +95,91 @@ public class PostDao extends DBContext<Post> {
         return new Post(id, title, thumbnail, briefInfo, details, authorId, categoryId, createdAt, updatedAt);
     }
 
-    public List<String> getAllCategories() {
-    List<String> categories = new ArrayList<>();
-    try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM categories")) {
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()) {
-            String category = rs.getString("name");
-            categories.add(category);
+    public List<Post> selectPostsByCategoryPaginated(int categoryId, int offset, int noOfRecords) {
+        List<Post> posts = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM posts WHERE category_id = ? LIMIT ?, ?")) {
+            preparedStatement.setInt(1, categoryId);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, noOfRecords);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String thumbnail = rs.getString("thumbnail");
+                String briefInfo = rs.getString("brief_info");
+                String details = rs.getString("details");
+                int authorId = rs.getInt("author_id");
+                int categoryIdFromDB = rs.getInt("category_id");
+                Timestamp createdAt = rs.getTimestamp("created_at");
+                Timestamp updatedAt = rs.getTimestamp("updated_at");
+                posts.add(new Post(id, title, thumbnail, briefInfo, details, authorId, categoryIdFromDB, createdAt, updatedAt));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return posts;
     }
-    return categories;
-}
+
+    public int getTotalPostsByCategory(int categoryId) {
+        int total = 0;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT COUNT(*) FROM posts WHERE category_id = ?")) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+    public List<Post> getLatestPosts(int limit) {
+        List<Post> posts = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM posts ORDER BY updated_at DESC LIMIT ?")) {
+            preparedStatement.setInt(1, limit);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                posts.add(mapResultSetToPost(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    public List<Post> searchPostsByTitle(String title) {
+        List<Post> posts = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM posts WHERE title LIKE ?")) {
+            preparedStatement.setString(1, "%" + title + "%");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                posts.add(mapResultSetToPost(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    
+    }
+    public List<Post> getHostPosts(int limit) {
+        List<Post> posts = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM posts ORDER BY updated_at ASC LIMIT ?")) {
+            preparedStatement.setInt(1, limit);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                posts.add(mapResultSetToPost(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
+   
 
 }
