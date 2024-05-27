@@ -97,18 +97,22 @@
     <jsp:include page="../common/header.jsp"></jsp:include>
         <div class="container">
             <div class="main-content">
-                <!-- Phần post list -->
+                <!-- Post list -->
                 <ul id="blog-list">
                 <c:forEach var="post" items="${postList}">
                     <li class="blog-item">
                         <img src="${post.thumbnail}" alt="${post.title}">
                         <div>
-                            <h2><a href="${pageContext.request.contextPath}/post_details?id=${post.id}">${post.title}</a></h2>
+                            <h2>
+                                <a href="${pageContext.request.contextPath}/post_details?id=${post.id}">${post.title}</a>
+                            </h2>
                             <p>${post.briefInfo}</p>
                         </div>
                     </li>
                 </c:forEach>
             </ul>
+
+            <!-- Pagination -->
             <div id="pagination">
                 <c:forEach begin="1" end="${noOfPages}" var="i">
                     <a href="${pageContext.request.contextPath}/blogs?page=${i}<c:if test='${selectedCategoryId != null}'>&categoryId=${selectedCategoryId}</c:if>'">
@@ -116,12 +120,13 @@
                         </a>
                 </c:forEach>
             </div>
+            <!-- No posts found message -->
             <c:if test="${empty postList}">
                 <p>No posts found with the specified title.</p>
             </c:if>
         </div>
         <aside class="sidebarblog">
-            <!-- Phần sidebar -->
+            <!-- Sidebar -->
             <div class="search-box-blog">
                 <h2>Search</h2>
                 <form action="${pageContext.request.contextPath}/blogs" method="get">
@@ -155,11 +160,12 @@
                 <ul>
                     <li>Email: hoangnam28102002@gmail.com</li>
                     <li>Phone: (+84)99968686</li>
-                    <li><a href="#">Contact Form</a></li>
+                    <li><a href="https://www.facebook.com/">Contact for work</a></li>
                 </ul>
             </div>
         </aside>
     </div>
+
     <jsp:include page="../common/footer.jsp"></jsp:include>
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

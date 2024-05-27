@@ -166,9 +166,9 @@
             <div class="contacts-blogdetails">
                 <h2>Contact</h2>
                 <ul>
-                    <li>Email: example@example.com</li>
-                    <li>Phone: (123) 456-7890</li>
-                    <li><a href="${pageContext.request.contextPath}/contact">Contact Form</a></li>
+                    <li>Email: hoangnam28102002@gmail.com</li>
+                    <li>Phone: (+84)99968686</li>
+                    <li><a href="https://www.facebook.com/">Contact for work</a></li>
                 </ul>
             </div>
         </aside>
