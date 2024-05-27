@@ -2,9 +2,7 @@ package daos.context;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,8 +13,8 @@ public abstract class DBContext<T> {
     public DBContext() throws SQLException {
         try {
             String user = "root";
-            String pass = "nam281002";
-            String url = "jdbc:mysql://localhost:3306/SWP_391";
+            String pass = "123456";
+            String url = "jdbc:mysql://localhost:3306/swp301";
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
