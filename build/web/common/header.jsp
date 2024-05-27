@@ -14,6 +14,9 @@
 <body>
     <jsp:include page="../common/search.jsp"></jsp:include>
 
+
+<jsp:include page="../common/search.jsp"></jsp:include>
+
     <header id="header" class="site-header">
 
         <div class="top-info border-bottom d-none d-md-block">
@@ -95,7 +98,6 @@
                             <li class="nav-item">
                                 <a class="nav-link me-4" href="contact.html">Contact</a>
                             </li>
-
                         </ul>
                         <div class="user-items d-flex">
                             <ul class="d-flex justify-content-end list-unstyled mb-0">
@@ -107,11 +109,23 @@
                                     </a>
                                 </li>
                                 <li class="pe-3">
+                                <c:if test="${sessionScope.user == null}">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <svg class="user">
                                         <use xlink:href="#user"></use>
                                         </svg>
                                     </a>
+                                </c:if>
+                                <c:if test="${sessionScope.user != null}">
+                                    <div class="dropdown btn-group">
+                                        <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">
+                                            Welcome ${sessionScope.user.fullName} <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            
+                                            <li><a class="dropdown-item" href="logout">logout</a></li>
+                                        </ul>
+                                    </c:if>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
@@ -131,20 +145,22 @@
                                                         </nav>
                                                         <div class="tab-content" id="nav-tabContent">
                                                             <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
-                                                                <div class="form-group py-3">
-                                                                    <label class="mb-2" for="sign-in">Username or email address *</label>
-                                                                    <input type="text" minlength="2" name="username" placeholder="Your Username" class="form-control w-100 rounded-3 p-3" required>
-                                                                </div>
-                                                                <div class="form-group pb-3">
-                                                                    <label class="mb-2" for="sign-in">Password *</label>
-                                                                    <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
-                                                                </div>
-                                                                <label class="py-3">
-                                                                    <input type="checkbox" required="" class="d-inline">
-                                                                    <span class="label-body">Remember me</span>
-                                                                    <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
-                                                                </label>
-                                                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
+                                                                <form action="login" method="post">
+                                                                    <div class="form-group py-3">
+                                                                        <label class="mb-2" for="sign-in">Username or email address *</label>
+                                                                        <input type="text" minlength="2" name="username" placeholder="Your Username" class="form-control w-100 rounded-3 p-3" value="${requestScope.username}" required>
+                                                                    </div>
+                                                                    <div class="form-group pb-3">
+                                                                        <label class="mb-2" for="sign-in">Password *</label>
+                                                                        <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
+                                                                    </div>
+                                                                    <label class="py-3">
+                                                                        <input type="checkbox" required="" class="d-inline">
+                                                                        <span class="label-body">Remember me</span>
+                                                                        <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
+                                                                    </label>
+                                                                    <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
+                                                                </form>
                                                             </div>
                                                             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                                                                 <div class="form-group py-3">
@@ -287,6 +303,82 @@
                                 <div class="image-holder">
                                     <img src="images/banner-image.png" class="img-fluid" alt="banner">
                                 </div>
+                            </li>
+                            <li class="cart-dropdown dropdown">
+                                <a href="cart.html" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                    <svg class="cart">
+                                    <use xlink:href="#cart"></use>
+                                    </svg><span class="fs-6 fw-light">(02)</span>
+                                </a>
+                                <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-primary">Your cart</span>
+                                        <span class="badge bg-primary rounded-pill">2</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
+                                            <div>
+                                                <h5>
+                                                    <a href="single-product.html">IPad (9th Gen)</a>
+                                                </h5>
+                                                <small>High quality in good price.</small>
+                                            </div>
+                                            <span class="text-primary">$870</span>
+                                        </li>
+                                        <li class="list-group-item bg-transparent d-flex justify-content-between lh-sm">
+                                            <div>
+                                                <h5>
+                                                    <a href="single-product.html">Drone with camera</a>
+                                                </h5>
+                                                <small>Professional drone with camera.</small>
+                                            </div>
+                                            <span class="text-primary">$600</span>
+                                        </li>
+                                        <li class="list-group-item bg-transparent d-flex justify-content-between">
+                                            <span class="text-uppercase"><b>Total (USD)</b></span>
+                                            <strong>$1470</strong>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <a href="cart.html" class="w-100 btn btn-dark mb-1" type="submit">View Cart</a>
+                                        <a href="checkout.html" class="w-100 btn btn-primary" type="submit">Go to checkout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</header>
+<section id="billboard" class="position-relative d-flex align-items-center py-5 bg-light-gray" style="background-image: url(images/banner-image-bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <div class="position-absolute end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next main-slider-button-next">
+        <svg class="chevron-forward-circle d-flex justify-content-center align-items-center border rounded-3 p-2" width="55" height="55">
+        <use xlink:href="#alt-arrow-right-outline"></use>
+        </svg>
+    </div>
+    <div class="position-absolute start-0 ps-0 ps-xxl-5 ms-0 ms-xxl-5 swiper-prev main-slider-button-prev">
+        <svg class="chevron-back-circle d-flex justify-content-center align-items-center border rounded-3 p-2" width="55" height="55">
+        <use xlink:href="#alt-arrow-left-outline"></use>
+        </svg>
+    </div>
+    <div class="swiper main-swiper">
+        <div class="swiper-wrapper d-flex align-items-center">
+            <div class="swiper-slide">
+                <div class="container">
+                    <div class="row d-flex flex-column-reverse flex-md-row align-items-center">
+                        <div class="col-md-5 offset-md-1">
+                            <div class="banner-content">
+                                <h2>GoPro hero9 Black</h2>
+                                <p>Limited stocks available. Grab it now!</p>
+                                <a href="shop.html" class="btn mt-3">Shop Collection</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="image-holder">
+                                <img src="images/banner-image.png" class="img-fluid" alt="banner">
                             </div>
                         </div>
                     </div>
