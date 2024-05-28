@@ -455,6 +455,8 @@
                 </div>
               </div>
                 </section>-->
+        
+        
 
         <section id="company-services" class="padding-large">
             <div class="container">
@@ -523,49 +525,49 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item1.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">Phones</a></h5>
+                                <h5 class="mt-2"><a href="./products">Phones</a></h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item2.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">PlayStations</a></h5>
+                                <h5 class="mt-2"><a href="./products">PlayStations</a></h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item3.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">Digital watches</a></h5>
+                                <h5 class="mt-2"><a href="./products">Digital watches</a></h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item4.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">Joysticks</a></h5>
+                                <h5 class="mt-2"><a href="./products">Joysticks</a></h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item5.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">EarPods</a></h5>
+                                <h5 class="mt-2"><a href="./products">EarPods</a></h5>
                             </a>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="card text-center py-4 mb-3 border rounded-3">
-                            <a href="shop.html">
+                            <a href="./products">
                                 <img src="images/cat-item6.png" class="img-fluid" alt="cart item">
-                                <h5 class="mt-2"><a href="shop.html">Laptops</a></h5>
+                                <h5 class="mt-2"><a href="./products">Laptops</a></h5>
                             </a>
                         </div>
                     </div>
@@ -879,7 +881,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image1.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Wireless headset</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Wireless headset</a></h5>
                                     <span class="price text-primary fw-light mb-2">$500</span>
                                 </div>
                             </div>
@@ -887,7 +889,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image2.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone x Pro Max</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Iphone x Pro Max</a></h5>
                                     <span class="price text-primary fw-light mb-2">$820</span>
                                 </div>
                             </div>
@@ -895,7 +897,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image3.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone 11 Pro</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Iphone 11 Pro</a></h5>
                                     <span class="price text-primary fw-light mb-2">$960</span>
                                 </div>
                             </div>
@@ -911,7 +913,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image4.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Apple airPod</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Apple airPod</a></h5>
                                     <span class="price text-primary fw-light mb-2">$450</span>
                                 </div>
                             </div>
@@ -919,7 +921,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image5.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Screen touch watch</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Screen touch watch</a></h5>
                                     <span class="price text-primary fw-light mb-2">$750</span>
                                 </div>
                             </div>
@@ -927,7 +929,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image6.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Digital watch</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Digital watch</a></h5>
                                     <span class="price text-primary fw-light mb-2">$660</span>
                                 </div>
                             </div>
@@ -943,7 +945,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image7.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Wireless Joysticks</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Wireless Joysticks</a></h5>
                                     <span class="price text-primary fw-light mb-2">$350</span>
                                 </div>
                             </div>
@@ -951,7 +953,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image8.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Apple White AirPod</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Apple White AirPod</a></h5>
                                     <span class="price text-primary fw-light mb-2">$330</span>
                                 </div>
                             </div>
@@ -959,7 +961,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image9.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Gimbal stabilizer</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Gimbal stabilizer</a></h5>
                                     <span class="price text-primary fw-light mb-2">$920</span>
                                 </div>
                             </div>
@@ -975,7 +977,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image10.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">Iphone 15 pro max</a></h5>
+                                    <h5 class="mt-2"><a href="./products">Iphone 15 pro max</a></h5>
                                     <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$1666</s> $999</span>
                                 </div>
                             </div>
@@ -983,7 +985,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image11.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">White AirPods</a></h5>
+                                    <h5 class="mt-2"><a href="./products">White AirPods</a></h5>
                                     <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$500</s> $410</span>
                                 </div>
                             </div>
@@ -991,7 +993,7 @@
                             <div class="item d-flex">
                                 <img src="images/item-image12.jpg" class="img-fluid rounded-3" alt="product item">
                                 <div class="item-content ms-3">
-                                    <h5 class="mt-2"><a href="single-product.html">CCTV camera</a></h5>
+                                    <h5 class="mt-2"><a href="./products">CCTV camera</a></h5>
                                     <span class="price text-primary fw-light mb-2"><s class="fs-5 fw-lighter text-muted">$600</s> $500</span>
                                 </div>
                             </div>
@@ -1184,15 +1186,15 @@
     <section id="instagram" class="padding-large">
         <div class="container">
             <div class="text-center mb-4">
-                <h3>Instagram #shoplite</h3>
+                <h3>Products</h3>
             </div>
             <div class="row">
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href="./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
@@ -1201,10 +1203,10 @@
                 </div>
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href="./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
@@ -1213,10 +1215,10 @@
                 </div>
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href=./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
@@ -1225,10 +1227,10 @@
                 </div>
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href="./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
@@ -1237,10 +1239,10 @@
                 </div>
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href="./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
@@ -1249,10 +1251,10 @@
                 </div>
                 <div class="col-md-2">
                     <figure class="instagram-item position-relative rounded-3">
-                        <a href="#" class="image-link position-relative">
+                        <a href="./products" class="image-link position-relative">
                             <div class="icon-overlay position-absolute d-flex justify-content-center">
                                 <svg class="instagram">
-                                <use xlink:href="#instagram"></use>
+                                <use xlink:href="./products"></use>
                                 </svg>
                             </div>
                             <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">

@@ -5,8 +5,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Blog</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blogDetails.css">
+        <title>Product List</title>
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,7 +22,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-        <title>Product List</title>
         <style>
             body {
                 overflow-x: hidden;
@@ -128,7 +127,7 @@
 
     </head>
     <body>
-           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="search" xmlns="http://www.w3.org/2000/symbolsvg" viewBox="0 0 24 24">
         <path fill="currentColor" fill-rule="evenodd" d="M11.5 2.75a8.75 8.75 0 1 0 0 17.5a8.75 8.75 0 0 0 0-17.5M1.25 11.5c0-5.66 4.59-10.25 10.25-10.25S21.75 5.84 21.75 11.5c0 2.56-.939 4.902-2.491 6.698l3.271 3.272a.75.75 0 1 1-1.06 1.06l-3.272-3.271A10.21 10.21 0 0 1 11.5 21.75c-5.66 0-10.25-4.59-10.25-10.25" clip-rule="evenodd" />
     </symbol>
@@ -199,22 +198,22 @@
         <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
     </symbol>
     </svg>
-        
-       <jsp:include page="../common/header.jsp"></jsp:include>
-    
-    <div class="product-main">
-        <div class="sidebar row">
-            <h3 class="col-2 text-center" onclick="redirectToHomePage()">Home Page</h3>
-            <div class="form-filter col-9">
-                <form action="productcontroller" method="get">
-                    <div class="search">
-                        <input type="text" name="search" id="inputSearch" />
-                    </div>
-                    <div class="category">
-                        <select name="category">
-                            <option value="">All Categories</option>
+
+    <jsp:include page="../common/header.jsp"></jsp:include>
+
+        <div class="product-main">
+            <div class="sidebar row">
+                <div class="form-filter col-9">
+                    <form action="products" method="get">
+                        <div class="search">
+                            <input type="text" name="search" id="inputSearch" placeholder="Search by Description" />
+                        </div>
+
+                        <div class="category">
+                            <select name="category">
+                                <option value="">All Categories</option>
                             <c:forEach var="category" items="${categories}">
-                                <option value="${category}">${category}</option>
+                                <option value="${category.id}">${category.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -235,24 +234,24 @@
 
     <div>
         <div class="title-box">
-            <h3 class="title_dienthoai">Điện thoại nổi bật nhất</h3>
+            <h3 class="title_dienthoai">Highlighted Products</h3>
         </div>
         <div class="main">
-            <c:forEach var="smartphone" items="${smartphone}">
-                <div class="smartphone">
-                    <a href="productDetail.jsp?id=${smartphone.id}" class="text-decoration-none">
+            <c:forEach var="product" items="${products}">
+                <div class="product">
+                    <a href="productDetail.jsp?id=${product.id}" class="text-decoration-none">
                         <div class="card col-sm-2 ms-5 p-0 ml-3">
                             <div class="img-product">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${smartphone.thumbnail}" alt="${smartphone.title}">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
                             </div>
                             <div class="card-body pb-0">
-                                <p class="card-title">${smartphone.description}</p>
+                                <p class="card-title">${product.description}</p>
                                 <div class="d-flex justify-content-between">
                                     <p class="card-text text-danger">
-                                        Original Price: <span class="original-price">${smartphone.originalPrice} $</span>
+                                        Original Price: <span class="original-price">${product.originalPrice} $</span>
                                     </p></br>
                                     <p>
-                                        Sale Price: ${smartphone.salePrice} $
+                                        Sale Price: ${product.salePrice} $
                                     </p>
                                 </div>
                             </div>
@@ -280,9 +279,9 @@
                                 <div class="d-flex justify-content-between">
                                     <p class="card-text text-danger">
                                         Original Price: <span class="original-price">${laptop.originalPrice} $</span>
-                                    </p></br>
+                                    </p><br>
                                     <p>
-                                        Sale Price: ${laptop.salePrice} $
+                                        Sale Price: ${laptop.salePrice} 
                                     </p>
                                 </div>
                             </div>
@@ -310,9 +309,9 @@
                                 <div class="d-flex justify-content-between">
                                     <p class="card-text text-danger">
                                         Original Price: <span class="original-price">${headphone.originalPrice} $</span>
-                                    </p></br>
+                                    </p><br>
                                     <p>
-                                        Sale Price: ${headphone.salePrice} $
+                                        Sale Price: ${headphone.salePrice} 
                                     </p>
                                 </div>
                             </div>
@@ -340,7 +339,7 @@
                                 <div class="d-flex justify-content-between">
                                     <p class="card-text text-danger">
                                         Original Price: <span class="original-price">${watch.originalPrice} $</span>
-                                    </p></br>
+                                    </p><br>
                                     <p>
                                         Sale Price: ${watch.salePrice} $
                                     </p>
@@ -354,7 +353,7 @@
     </div>
 
     <div class="clearfix"></div>
-    
+
     <script>
         function redirectToHomePage() {
             window.location.href = "HomePage.jsp";
@@ -368,10 +367,15 @@
             alert('Feedback for product ' + productId);
         }
     </script>
-    
+
     <jsp:include page="../common/footer.jsp"></jsp:include>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
-    </body>
+    <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
 </html>

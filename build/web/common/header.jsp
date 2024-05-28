@@ -14,115 +14,116 @@
 <body>
     <jsp:include page="../common/search.jsp"></jsp:include>
 
-    <header id="header" class="site-header">
+        <header id="header" class="site-header">
 
-        <div class="top-info border-bottom d-none d-md-block">
-            <div class="container-fluid">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <p class="fs-6 my-2 text-center">Need any help? Call us <a href="#">112233344455</a></p>
-                    </div>
-                    <div class="col-md-4 border-start border-end">
-                        <p class="fs-6 my-2 text-center">Summer sale discount off 60% off! <a class="text-decoration-underline" href="shop.html">Shop Now</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <p class="fs-6 my-2 text-center">2-3 business days delivery & free returns</p>
+            <div class="top-info border-bottom d-none d-md-block">
+                <div class="container-fluid">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <p class="fs-6 my-2 text-center">Need any help? Call us <a href="#">112233344455</a></p>
+                        </div>
+                        <div class="col-md-4 border-start border-end">
+                            <p class="fs-6 my-2 text-center">Summer sale discount off 60% off! <a class="text-decoration-underline" href="./products">Shop Now</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="fs-6 my-2 text-center">2-3 business days delivery & free returns</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <nav id="header-nav" class="navbar navbar-expand-lg py-3">
-            <div class="container">
-                <a class="navbar-brand" href="./home_page">
-                    <img src="images/logo.png" class="logo">
-                </a>
-                <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg class="navbar-icon">
-                    <use xlink:href="#navbar-icon"></use>
-                    </svg>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
-                    <div class="offcanvas-header px-4 pb-0">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="images/logo.png" class="logo" alt="Logo" style="width: 165px; height: 39px;">
-                        </a>
-                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link me-4 active" href="./home_page">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="./products">Shop</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="./blogs">Blogs</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-                                <ul class="dropdown-menu animate slide border">
-                                    <li>
-                                        <a href="about.html" class="dropdown-item fw-light">About <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html" class="dropdown-item fw-light">Shop <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html" class="dropdown-item fw-light">Single Product <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html" class="dropdown-item fw-light">Cart <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.html" class="dropdown-item fw-light">Checkout <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html" class="dropdown-item fw-light">Blog <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="single-post.html" class="dropdown-item fw-light">Single Post <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html" class="dropdown-item fw-light">Contact <span class="badge bg-primary">Pro</span></a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-4" href="contact.html">Contact</a>
-                            </li>
-
-                        </ul>
-                        <div class="user-items d-flex">
-                            <ul class="d-flex justify-content-end list-unstyled mb-0">
-                                <li class="search-item pe-3">
-                                    <a href="#" class="search-button">
-                                        <svg class="search">
-                                        <use xlink:href="#search"></use>
-                                        </svg>
-                                    </a>
+            <nav id="header-nav" class="navbar navbar-expand-lg py-3">
+                <div class="container">
+                    <a class="navbar-brand" href="./home_page">
+                        <img src="images/logo.png" class="logo">
+                    </a>
+                    <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <svg class="navbar-icon">
+                        <use xlink:href="#navbar-icon"></use>
+                        </svg>
+                    </button>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
+                        <div class="offcanvas-header px-4 pb-0">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="images/logo.png" class="logo" alt="Logo" style="width: 165px; height: 39px;">
+                            </a>
+                            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link me-4 active" href="./home_page">Home</a>
                                 </li>
-                                 <li class="pe-3">
-                                <c:if test="${sessionScope.user == null}">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <svg class="user">
-                                        <use xlink:href="#user"></use>
-                                        </svg>
-                                    </a>
-                                </c:if>
-                                <c:if test="${sessionScope.user != null}">
-                                    <div class="dropdown btn-group">
-                                        <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">
-                                            Welcome ${sessionScope.user.fullName} <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Foo</a></li>
-                                            <li><a class="dropdown-item" href="logout">logout</a></li>
-                                        </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link me-4" href="#">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-4" href="./products">Shop</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-4" href="./blogs">Blogs</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
+                                    <ul class="dropdown-menu animate slide border">
+                                        <li>
+                                            <a href="about.html" class="dropdown-item fw-light">About <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="shop.html" class="dropdown-item fw-light">Shop <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="single-product.html" class="dropdown-item fw-light">Single Product <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="cart.html" class="dropdown-item fw-light">Cart <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="checkout.html" class="dropdown-item fw-light">Checkout <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="blog.html" class="dropdown-item fw-light">Blog <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="single-post.html" class="dropdown-item fw-light">Single Post <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="contact.html" class="dropdown-item fw-light">Contact <span class="badge bg-primary">Pro</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-4" href="contact.html">Contact</a>
+                                </li>
+
+                            </ul>
+                            <div class="user-items d-flex">
+                                <ul class="d-flex justify-content-end list-unstyled mb-0">
+                                    <li class="search-item pe-3">
+                                        <a href="#" class="search-button">
+                                            <svg class="search">
+                                            <use xlink:href="#search"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li class="pe-3">
+                                    <c:if test="${sessionScope.user == null}">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <svg class="user">
+                                            <use xlink:href="#user"></use>
+                                            </svg>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user != null}">
+                                        <div class="dropdown btn-group">
+                                            <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">
+                                                Welcome ${sessionScope.user.fullName} <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a></li>
+                                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                            </ul>
+                                        </div>
                                     </c:if>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -175,12 +176,50 @@
                                                                 </label>
                                                                 <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Register</button>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Modal for Change Password -->
+                                    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-bottom-0">
+                                                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="changepass" method="post">
+                                                        <div class="form-group py-3">
+                                                            <label class="mb-2" for="changepass">Current Pass *</label>
+                                                            <input type="password" minlength="2" name="oldPassword" placeholder="Your Old Password" class="form-control w-100 rounded-3 p-3" required>
+                                                        </div>
+                                                        <div class="form-group pb-3">
+                                                            <label class="mb-2" for="changepass">New Pass *</label>
+                                                            <input type="password" minlength="2" name="newPassword" placeholder="Your New Password" class="form-control w-100 rounded-3 p-3" required>
+                                                        </div>
+                                                        <div class="form-group pb-3">
+                                                            <label class="mb-2" for="changepass">Confirm Pass *</label>
+                                                            <input type="password" minlength="2" name="confirmPassword" placeholder="Confirm Your New Password" class="form-control w-100 rounded-3 p-3" required>
+                                                        </div>
+                                                        <button type="submit" name="submit" class="btn btn-dark w-100 my-3" onclick="doUpdate()">Change Password</button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function doUpdate() {
+                                            if (confirm("Are you sure about this change?")) {
+                                                alert("Submit Successful");
+                                            }
+                                        }
+                                    </script>
                                 </li>
                                 <li class="wishlist-dropdown dropdown pe-3">
                                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
@@ -294,7 +333,7 @@
                                 <div class="banner-content">
                                     <h2>GoPro hero9 Black</h2>
                                     <p>Limited stocks available. Grab it now!</p>
-                                    <a href="shop.html" class="btn mt-3">Shop Collection</a>
+                                    <a href="./products" class="btn mt-3">Shop Collection</a>
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">
@@ -312,7 +351,7 @@
                                 <div class="banner-content">
                                     <h2>Iphone 15 Pro Max</h2>
                                     <p>Discount available. Grab it now!</p>
-                                    <a href="shop.html" class="btn mt-3">Shop Product</a>
+                                    <a href="./products" class="btn mt-3">Shop Product</a>
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">
@@ -330,7 +369,7 @@
                                 <div class="banner-content">
                                     <h2>Macbook Collection</h2>
                                     <p>Limited stocks available. Grab it now!</p>
-                                    <a href="shop.html" class="btn mt-3">Shop Collection</a>
+                                    <a href="./products" class="btn mt-3">Shop Collection</a>
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">

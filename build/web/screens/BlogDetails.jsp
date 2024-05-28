@@ -134,7 +134,7 @@
             <div class="search-box">
                 <h2>Search</h2>
                 <form action="${pageContext.request.contextPath}/post_details" method="get">
-                    <input type="text" name="search" placeholder="Search posts...">
+                    <input type="text" name="search" placeholder="Search posts by title...">
                     <button type="submit">Search</button>
                 </form>
             </div>

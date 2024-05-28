@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
-/**
- *
- * @author YOUR NAM
- */
 import java.sql.Timestamp;
 
 public class Products {
@@ -15,7 +7,7 @@ public class Products {
     private String title;
     private String description;
     private String thumbnail;
-    private String category;
+    private int categoryId; // Changed to int to store category ID
     private double originalPrice;
     private Double salePrice;
     private int stock;
@@ -25,11 +17,24 @@ public class Products {
     // Constructors
     public Products() {}
 
-    public Products(String title, String description, String thumbnail, String category, double originalPrice, Double salePrice, int stock) {
+    public Products(int id, String title, String description, String thumbnail, int categoryId, double originalPrice, Double salePrice, int stock, Timestamp createdAt, Timestamp updatedAt) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
-        this.category = category;
+        this.categoryId = categoryId; // Updated constructor
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.stock = stock;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Products(String title, String description, String thumbnail, int categoryId, double originalPrice, Double salePrice, int stock) {
+        this.title = title;
+        this.description = description;
+        this.thumbnail = thumbnail;
+        this.categoryId = categoryId; // Updated constructor
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
         this.stock = stock;
@@ -68,12 +73,12 @@ public class Products {
         this.thumbnail = thumbnail;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryId() { // Changed getter method
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) { // Changed setter method
+        this.categoryId = categoryId;
     }
 
     public double getOriginalPrice() {
@@ -118,12 +123,12 @@ public class Products {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "Products{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
-                ", category='" + category + '\'' +
+                ", categoryId=" + categoryId + // Updated toString method
                 ", originalPrice=" + originalPrice +
                 ", salePrice=" + salePrice +
                 ", stock=" + stock +
@@ -132,4 +137,3 @@ public class Products {
                 '}';
     }
 }
-
