@@ -140,7 +140,7 @@ body {
 /* Thumbnail size for latest blog posts */
 .latest-blog img {
     border: solid #000;
-    width: 100%; /* Ensures image fits within the list item */
+    width: 50%; /* Ensures image fits within the list item */
     height: auto;
     max-height: 100px;
     border-radius: 8px;

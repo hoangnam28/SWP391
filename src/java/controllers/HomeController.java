@@ -26,8 +26,8 @@ public class HomeController extends HttpServlet {
         List<Post> hostPosts = null;
 
         try {
-            SliderDao sliderDao = new SliderDao();
-            sliders = sliderDao.findAll();
+//            SliderDao sliderDao = new SliderDao();
+//            sliders = sliderDao.findAll();
 
             PostDao postDao = new PostDao();
             latestPosts = postDao.getLatestPosts(3); // Lấy 6 bài đăng mới nhất

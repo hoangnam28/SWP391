@@ -106,12 +106,24 @@
                                         </svg>
                                     </a>
                                 </li>
-                                <li class="pe-3">
+                                 <li class="pe-3">
+                                <c:if test="${sessionScope.user == null}">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <svg class="user">
                                         <use xlink:href="#user"></use>
                                         </svg>
                                     </a>
+                                </c:if>
+                                <c:if test="${sessionScope.user != null}">
+                                    <div class="dropdown btn-group">
+                                        <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">
+                                            Welcome ${sessionScope.user.fullName} <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Foo</a></li>
+                                            <li><a class="dropdown-item" href="logout">logout</a></li>
+                                        </ul>
+                                    </c:if>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
@@ -131,20 +143,22 @@
                                                         </nav>
                                                         <div class="tab-content" id="nav-tabContent">
                                                             <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
-                                                                <div class="form-group py-3">
-                                                                    <label class="mb-2" for="sign-in">Username or email address *</label>
-                                                                    <input type="text" minlength="2" name="username" placeholder="Your Username" class="form-control w-100 rounded-3 p-3" required>
-                                                                </div>
-                                                                <div class="form-group pb-3">
-                                                                    <label class="mb-2" for="sign-in">Password *</label>
-                                                                    <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
-                                                                </div>
-                                                                <label class="py-3">
-                                                                    <input type="checkbox" required="" class="d-inline">
-                                                                    <span class="label-body">Remember me</span>
-                                                                    <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
-                                                                </label>
-                                                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
+                                                                <form action="login" method="post">
+                                                                    <div class="form-group py-3">
+                                                                        <label class="mb-2" for="sign-in">Username or email address *</label>
+                                                                        <input type="text" minlength="2" name="username" placeholder="Your Username" class="form-control w-100 rounded-3 p-3" value="${requestScope.username}" required>
+                                                                    </div>
+                                                                    <div class="form-group pb-3">
+                                                                        <label class="mb-2" for="sign-in">Password *</label>
+                                                                        <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
+                                                                    </div>
+                                                                    <label class="py-3">
+                                                                        <input type="checkbox" required="" class="d-inline">
+                                                                        <span class="label-body">Remember me</span>
+                                                                        <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
+                                                                    </label>
+                                                                    <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
+                                                                </form>
                                                             </div>
                                                             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                                                                 <div class="form-group py-3">
