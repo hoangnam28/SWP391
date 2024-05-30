@@ -15,8 +15,8 @@ public abstract class DBContext<T> {
     public DBContext() throws SQLException {
         try {
             String user = "root";
-            String pass = "nam281002";
-            String url = "jdbc:mysql://localhost:3306/SWP_391";
+            String pass = "12345678";
+            String url = "jdbc:mysql://localhost:3306/SWP391";
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {

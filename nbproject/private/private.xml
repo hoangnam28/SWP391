@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/Blog.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/css/blog.css</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/BlogDetails.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/images/main-logo.png</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/header.jsp</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/web/screens/forgotPassword.jsp</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/web/screens/newPassword.jsp</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/web/common/header.jsp</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/web/screens/EnterOtp.jsp</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/src/java/ultis/EnterOtp.java</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/src/java/daos/context/DBContext.java</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/web/WEB-INF/web.xml</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/src/java/ultis/ForgotPassword.java</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/src/java/ultis/NewPassword.java</file>
+            <file>file:/D:/2024/Desktop/New%20folder/SWP391/src/java/controllers/PostController.java</file>
         </group>
     </open-files>
 </project-private>

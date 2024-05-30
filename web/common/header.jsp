@@ -127,6 +127,7 @@
                                                             <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
                                                                 <button class="nav-link text-uppercase active" id="nav-sign-in-tab" data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab" aria-controls="nav-sign-in" aria-selected="true">Sign In</button>
                                                                 <button class="nav-link text-uppercase" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">Register</button>
+                                                                <button class="nav-link text-uppercase" id="nav-changepass-tab" data-bs-toggle="tab" data-bs-target="#nav-changepass" type="button" role="tab" aria-controls="nav-changepass" aria-selected="false">ChangePass</button>
                                                             </div>
                                                         </nav>
                                                         <div class="tab-content" id="nav-tabContent">
@@ -141,8 +142,12 @@
                                                                 </div>
                                                                 <label class="py-3">
                                                                     <input type="checkbox" required="" class="d-inline">
-                                                                    <span class="label-body">Remember me</span>
-                                                                    <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
+
+                                                                    <span class="label-body">Remember me
+                                                                     <a href="enterotp">Forgot Password</a>   
+                                                                    </span>
+                                                                   
+
                                                                 </label>
                                                                 <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
                                                             </div>
@@ -161,6 +166,30 @@
                                                                 </label>
                                                                 <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Register</button>
                                                             </div>
+                                                            <form action="changepass" method="post">
+                                                                <div class="tab-pane fade" id="nav-changepass" role="tabpanel" aria-labelledby="nav-register-tab">
+                                                                    <div class="form-group py-3">
+                                                                        <label class="mb-2" for="changepass">Current Pass *</label>
+                                                                        <input type="password" minlength="2" name="oldPassword" placeholder="Your Old Password" class="form-control w-100 rounded-3 p-3" required>
+                                                                    </div>
+                                                                    <div class="form-group pb-3">
+                                                                        <label class="mb-2" for="changepass">New Pass *</label>
+                                                                        <input type="password" minlength="2" name="newPassword" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
+                                                                    </div>
+                                                                    <div class="form-group pb-3">
+                                                                        <label class="mb-2" for="changepass">Confirm Pass *</label>
+                                                                        <input type="password" minlength="2" name="confirmPassword" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
+                                                                    </div>
+                                                                    <button type="submit" name="submit" class="btn btn-dark w-100 my-3" onclick="doUpdate()">Change Password</button>
+                                                                </div>
+                                                            </form>
+                                                            <script>
+                                                                function doUpdate() {
+                                                                    if (confirm("Are you sure about this change?")) {
+                                                                        alert("Submit Susscessful");
+                                                                    }
+                                                                }
+                                                            </script>
                                                         </div>
                                                     </div>
                                                 </div>
