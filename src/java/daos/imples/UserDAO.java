@@ -1,101 +1,59 @@
 package daos.imples;
 
 import daos.context.DBContext;
-import models.User;
-
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import models.User;
 
 public class UserDAO extends DBContext<User> {
 
-    private static final String SELECT_ALL_POSTS_PAGINATED = "SELECT * FROM posts ORDER BY updated_at DESC LIMIT ?, ?";
-    private static final String SELECT_TOTAL_POSTS = "SELECT COUNT(*) FROM posts";
-    private static final String SELECT_POST_BY_ID = "SELECT * FROM posts WHERE id = ?";
-    private static final String CURRENT_PASS = "SELECT email, password FROM users WHERE email = ?  AND password = ?";
-    private static final String CHANGE_PASS = "update users set password = ? where email = ?";
-//nam281002@gmail.com
-//12345
     public UserDAO() throws SQLException {
         super();
     }
 
+    public boolean changePass(int userId, String newPassword) {
+        String query = "UPDATE swp_391.users SET password = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, userId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean currentPass(int userId, String oldPassword) {
+        String query = "SELECT * FROM swp_391.users WHERE id = ? AND password = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, oldPassword);
+            return preparedStatement.executeQuery().next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @Override
     public List<User> findAll() {
-
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public User findById(int id) {
-        User post = null;
-
-        return post;
-    }
-
-    public boolean currentPass(String email, String oldpass) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(CURRENT_PASS)) {
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, oldpass);
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                // Check if the ResultSet has any rows (indicating a match)
-                if (rs.next()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Fail: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public boolean changePass(String email, String newpass) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_PASS)) {
-            preparedStatement.setString(1, newpass);
-            preparedStatement.setString(2, email);
-            int rowAffected = preparedStatement.executeUpdate();
-            return rowAffected > 0;
-        } catch (SQLException e) {
-            System.out.println("Fail: " + e.getMessage());
-            return false;
-        }
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public User update(User model) {
-        // Implementation for updating a post
-        return null;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void deleteById(int id) {
-        // Implementation for deleting a post
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    public int getTotalUsers() {
-        int totalUsers = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TOTAL_POSTS)) {
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                totalUsers = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return totalUsers;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        UserDAO dao = new UserDAO();
-//        boolean check = dao.currentPass("nam281002@gmail.com", "12345");
-        boolean check = dao.changePass("nam281002@gmail.com", "123456");
-        System.out.println(check);
-    }
-
 }

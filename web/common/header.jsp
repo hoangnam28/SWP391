@@ -147,20 +147,21 @@
                                                                 <form action="login" method="post">
                                                                     <div class="form-group py-3">
                                                                         <label class="mb-2" for="sign-in">Username or email address *</label>
-                                                                        <input type="text" minlength="2" name="username" placeholder="Your Username" class="form-control w-100 rounded-3 p-3" value="${requestScope.username}" required>
+                                                                        <input type="text" minlength="2" name="email" placeholder="Your Email" class="form-control w-100 rounded-3 p-3" value="${requestScope.email}" required>
                                                                     </div>
                                                                     <div class="form-group pb-3">
                                                                         <label class="mb-2" for="sign-in">Password *</label>
                                                                         <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
                                                                     </div>
                                                                     <label class="py-3">
-                                                                        <input type="checkbox" required="" class="d-inline">
+                                                                        <input type="checkbox" class="d-inline">
                                                                         <span class="label-body">Remember me</span>
-                                                                        <span class="label-body"><a href="#" class="fw-bold">Forgot Password</a></span>
+                                                                        <span class="label-body"><a href="enterotp">Forgot Password</a></span>
                                                                     </label>
                                                                     <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
                                                                 </form>
                                                             </div>
+
                                                             <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
                                                                 <div class="form-group py-3">
                                                                     <label class="mb-2" for="register">Your email address *</label>
@@ -192,6 +193,21 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+
+                                                    <!-- Display error message -->
+                                                    <c:if test="${not empty error}">
+                                                        <div class="alert alert-danger" role="alert">
+                                                            ${error}
+                                                        </div>
+                                                    </c:if>
+
+                                                    <!-- Display success message -->
+                                                    <c:if test="${not empty success}">
+                                                        <div class="alert alert-success" role="alert">
+                                                            ${success}
+                                                        </div>
+                                                    </c:if>
+
                                                     <form action="changepass" method="post">
                                                         <div class="form-group py-3">
                                                             <label class="mb-2" for="changepass">Current Pass *</label>

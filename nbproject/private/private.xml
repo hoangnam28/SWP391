@@ -3,23 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/HomeController.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/HomePage.jsp</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/ChangePassController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LogoutController.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/WEB-INF/web.xml</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/UserDAO.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/ProductDao.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LoginController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/ProductController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/BlogDetails.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/nbproject/build-impl.xml</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/context/DBContext.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/SliderController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Helper.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/ProductLists.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/Products.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/User.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/AccountDao.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/CategoryDao.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/header.jsp</file>
         </group>
     </open-files>

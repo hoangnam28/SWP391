@@ -18,7 +18,6 @@ public class ChangePassController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private UserDAO dao;
-    // Assuming CategoryDao is required for other operations, otherwise it can be removed.
 
     public void init() throws ServletException {
         try {
@@ -29,28 +28,38 @@ public class ChangePassController extends HttpServlet {
         }
     }
 
-     @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String email = "";
+        Integer userId = (Integer) session.getAttribute("user_id");
+        if (userId == null) {
+            response.sendRedirect("./login");
+            return;
+        }
+        
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
-        boolean check = dao.currentPass(email, oldPassword);
+
+        boolean check = dao.currentPass(userId, oldPassword);
         if (check) {
             if (confirmPassword.equals(newPassword)) {
-                boolean success = dao.changePass(email, newPassword);
+                boolean success = dao.changePass(userId, newPassword);
                 if (success) {
-                    response.sendRedirect(request.getContextPath() + "/home_page");
+                    request.setAttribute("success", "Password changed successfully.");
+                    request.getRequestDispatcher("./home_page").forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/home_page");
+                    request.setAttribute("error", "Failed to change password.");
+                    request.getRequestDispatcher("./home_page").forward(request, response);
                 }
             } else {
-                response.sendRedirect(request.getContextPath() + "/home_page");
+                request.setAttribute("error", "New password and confirmation do not match.");
+                request.getRequestDispatcher("./home_page").forward(request, response);
             }
         } else {
-           response.sendRedirect(request.getContextPath() + "/home_page");
+            request.setAttribute("error", "Current password is incorrect.");
+            request.getRequestDispatcher("./home_page").forward(request, response);
         }
     }
 }
