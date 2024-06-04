@@ -95,76 +95,86 @@
     </svg>
     <!-- Include header.jsp from common folder -->
     <jsp:include page="../common/header.jsp"></jsp:include>
-        <div class="container">
-            <div class="main-content">
-                <!-- Post list -->
-                <ul id="blog-list">
-                <c:forEach var="post" items="${postList}">
-                    <li class="blog-item">
-                        <img src="${post.thumbnail}" alt="${post.title}">
-                        <div>
-                            <h2>
-                                <a href="${pageContext.request.contextPath}/post_details?id=${post.id}">${post.title}</a>
-                            </h2>
-                            <p>${post.briefInfo}</p>
-                        </div>
+<div class="container">
+    <div class="main-content">
+        <!-- Post list -->
+        <ul id="blog-list">
+            <c:forEach var="post" items="${postList}">
+                <li class="blog-item">
+                    <img src="${post.thumbnail}" alt="${post.title}">
+                    <div>
+                        <h2>
+                            <a href="${pageContext.request.contextPath}/post_details?id=${post.id}">${post.title}</a>
+                        </h2>
+                        <p>${post.briefInfo}</p>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+
+        <!-- Pagination -->
+        <div id="pagination">
+            <c:if test="${noOfPages > 1}">
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:url value="/blogs" var="pageUrl">
+                        <c:param name="page" value="${i}" />
+                        <c:if test="${selectedCategoryId != null}">
+                            <c:param name="categoryId" value="${selectedCategoryId}" />
+                        </c:if>
+                    </c:url>
+                    <a href="${pageUrl}">
+                        <button <c:if test="${i == currentPage}">disabled</c:if>>${i}</button>
+                    </a>
+                </c:forEach>
+            </c:if>
+        </div>
+        <!-- No posts found message -->
+        <c:if test="${empty postList}">
+            <p>No posts found with the specified title.</p>
+        </c:if>
+    </div>
+    <aside class="sidebarblog">
+        <!-- Sidebar -->
+        <div class="search-box-blog">
+            <h2>Search</h2>
+            <form action="${pageContext.request.contextPath}/blogs" method="get">
+                <input type="text" id="search-input" name="search" placeholder="Search posts by title...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="categories-blog">
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <c:forEach var="category" items="${categories}">
+                    <li><a href="./blogs?categoryId=${category.id}">${category.name}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+        <div class="latest-blog">
+            <h2>Latest Posts</h2>
+            <ul id="latest-blog-list">
+                <c:forEach var="latestPost" items="${latestPosts}">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/post_details?id=${latestPost.id}">
+                            <img src="${latestPost.thumbnail}" alt="${latestPost.title}">
+                            <span>${latestPost.title}</span>
+                        </a>
                     </li>
                 </c:forEach>
             </ul>
-
-            <!-- Pagination -->
-            <div id="pagination">
-                <c:forEach begin="1" end="${noOfPages}" var="i">
-                    <a href="${pageContext.request.contextPath}/blogs?page=${i}<c:if test='${selectedCategoryId != null}'>&categoryId=${selectedCategoryId}</c:if>'">
-                        <button <c:if test="${i == currentPage}">disabled</c:if>>${i}</button>
-                        </a>
-                </c:forEach>
-            </div>
-            <!-- No posts found message -->
-            <c:if test="${empty postList}">
-                <p>No posts found with the specified title.</p>
-            </c:if>
         </div>
-        <aside class="sidebarblog">
-            <!-- Sidebar -->
-            <div class="search-box-blog">
-                <h2>Search</h2>
-                <form action="${pageContext.request.contextPath}/blogs" method="get">
-                    <input type="text" id="search-input" name="search" placeholder="Search posts by title...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-            <div class="categories-blog">
-                <h3>Categories</h3>
-                <ul class="category-list">
-                    <c:forEach var="category" items="${categories}">
-                        <li><a href="./blogs?categoryId=${category.id}">${category.name}</a></li>
-                        </c:forEach>
-                </ul>
-            </div>
-            <div class="latest-blog">
-                <h2>Latest Posts</h2>
-                <ul id="latest-blog-list">
-                    <c:forEach var="latestPost" items="${latestPosts}">
-                        <li>
-                            <a href="${pageContext.request.contextPath}/post_details?id=${latestPost.id}">
-                                <img src="${latestPost.thumbnail}" alt="${latestPost.title}">
-                                <span>${latestPost.title}</span>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-            <div class="contacts-blog">
-                <h2>Contact</h2>
-                <ul>
-                    <li>Email: hoangnam28102002@gmail.com</li>
-                    <li>Phone: (+84)99968686</li>
-                    <li><a href="https://www.facebook.com/">Contact for work</a></li>
-                </ul>
-            </div>
-        </aside>
-    </div>
+        <div class="contacts-blog">
+            <h2>Contact</h2>
+            <ul>
+                <li>Email: hoangnam28102002@gmail.com</li>
+                <li>Phone: (+84)99968686</li>
+                <li><a href="https://www.facebook.com/">Contact for work</a></li>
+            </ul>
+        </div>
+    </aside>
+</div>
+
+
 
     <jsp:include page="../common/footer.jsp"></jsp:include>
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>

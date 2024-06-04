@@ -21,6 +21,7 @@ public class PostController extends HttpServlet {
     private PostDao postDAO;
     private CategoryDao categoryDao;
 
+    // Khởi tạo các đối tượng DAO
     public void init() throws ServletException {
         try {
             postDAO = new PostDao();
@@ -31,10 +32,11 @@ public class PostController extends HttpServlet {
         }
     }
 
+    // Xử lý yêu cầu GET
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int page = 1;
-        int recordsPerPage = 10;
+        int recordsPerPage = 4;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
         }
@@ -46,16 +48,17 @@ public class PostController extends HttpServlet {
         int noOfRecords;
 
         if (searchQuery != null && !searchQuery.isEmpty()) {
-            // Perform search by title
             list = postDAO.searchPostsByTitle(searchQuery);
-            noOfRecords = list.size(); // Update the number of records to the size of search results
+            noOfRecords = list.size(); // Cập nhật số lượng bản ghi thành kích thước của kết quả tìm kiếm
             request.setAttribute("searchQuery", searchQuery);
         } else if (categoryIdParam != null && !categoryIdParam.isEmpty()) {
             int categoryId = Integer.parseInt(categoryIdParam);
+            // Lấy các bài viết theo danh mục với phân trang
             list = postDAO.selectPostsByCategoryPaginated(categoryId, (page - 1) * recordsPerPage, recordsPerPage);
             noOfRecords = postDAO.getTotalPostsByCategory(categoryId);
             request.setAttribute("selectedCategoryId", categoryId);
         } else {
+            // Lấy tất cả các bài viết với phân trang
             list = postDAO.selectAllPostsPaginated((page - 1) * recordsPerPage, recordsPerPage);
             noOfRecords = postDAO.getTotalPosts();
         }
@@ -64,6 +67,7 @@ public class PostController extends HttpServlet {
         request.setAttribute("categories", categories);
         List<Post> latestPosts = postDAO.getLatestPosts(3);
 
+        // Tính toán số trang
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
         request.setAttribute("postList", list);
@@ -73,5 +77,4 @@ public class PostController extends HttpServlet {
 
         request.getRequestDispatcher("/screens/Blog.jsp").forward(request, response);
     }
-
 }

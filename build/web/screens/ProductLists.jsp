@@ -206,8 +206,9 @@
                 <div class="form-filter col-9">
                     <form action="products" method="get">
                         <div class="search">
-                            <input type="text" name="search" id="inputSearch" placeholder="Search by Description" />
+                            <input type="text" name="title" id="inputSearchTitle" placeholder="Search by Title" />
                         </div>
+
 
                         <div class="category">
                             <select name="category">
@@ -220,15 +221,17 @@
                     <div class="sortby">
                         <select name="sort">
                             <option value="sort by">Sort by</option>
-                            <option value="price">Price</option>
-                            <option value="date">Latest Date</option>
+                            <option value="price_asc">Price Ascending</option>
+                            <option value="price_desc">Price Descending</option>
                         </select>
                     </div>
+
                     <div class="filter">
                         <input type="submit" value="Filter"/>
                     </div>
                 </form>
             </div>
+                
         </div>
     </div>
 
@@ -260,6 +263,9 @@
                 </div>
             </c:forEach>
         </div>
+        <c:if test="${empty products}" >
+            <p style="text-align: center">No products found with the specified title.</p>
+        </c:if>
     </div>
 
     <div>

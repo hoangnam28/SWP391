@@ -18,7 +18,7 @@
               <div class="col-lg-3 col-sm-6 pb-3">
                 <div class="footer-menu">
                   <img src="images/logo.png" alt="logo" class="img-fluid mb-2">
-                  <p>Nisi, purus vitae, ultrices nunc. Sit ac sit suscipit hendrerit. Gravida massa volutpat aenean odio erat nullam fringilla.</p>
+                  <p>Nơi bạn có thể mua sắm những món đồ công nghệ với giá tốt và chất lượng.</p>
                   <div class="social-links">
                     <ul class="d-flex list-unstyled">
                       <li>

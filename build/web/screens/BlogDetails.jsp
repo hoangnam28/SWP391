@@ -28,12 +28,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
         <style>
-        .img {
-            width: 800px;
-            height: 800px;
-            object-fit: cover; /* Đảm bảo hình ảnh được cắt để vừa khít kích thước */
-        }
-    </style>
+            .img {
+                width: 800px;
+                height: 800px;
+                object-fit: cover; /* Đảm bảo hình ảnh được cắt để vừa khít kích thước */
+            }
+        </style>
     </head>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -122,19 +122,21 @@
                     <div class="post-details">
                         <p>${post.details}</p>
                     </div>
-                    <%-- Hiển thị thông báo nếu không tìm thấy bài viết --%>
-                    <c:if test="${not empty message}">
-                        <p>${message}</p>
-                    </c:if>
+
                 </div>
+
             </div>
+            <%-- Hiển thị thông báo nếu không tìm thấy bài viết --%>
+            <c:if test="${not empty message}">
+                <p>${message}</p>
+            </c:if>
 
         </div>
         <aside class="sidebardetails">
             <div class="search-box">
                 <h2>Search</h2>
-                <form action="${pageContext.request.contextPath}/post_details" method="get">
-                    <input type="text" name="search" placeholder="Search posts by title...">
+                <form action="${pageContext.request.contextPath}/blogs" method="get">
+                    <input type="text" id="search-input" name="search" placeholder="Search posts by title...">
                     <button type="submit">Search</button>
                 </form>
             </div>

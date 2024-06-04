@@ -38,6 +38,7 @@ public class ProductController extends HttpServlet {
         String searchByDescription = req.getParameter("search");
         String category = req.getParameter("category");
         String sortPrice = req.getParameter("sort");
+        String searchByTitle = req.getParameter("title");
 
         try {
             // Fetch all categories
@@ -52,13 +53,20 @@ public class ProductController extends HttpServlet {
                 allProducts = daoProductController.findAll();
             }
 
+            // Search products by title
+            if (searchByTitle != null && !searchByTitle.isEmpty()) {
+                allProducts = daoProductController.findByTitle(searchByTitle);
+            }
+
             // Search products by description
             if (searchByDescription != null && !searchByDescription.isEmpty()) {
                 allProducts = daoProductController.findByDescription(searchByDescription);
             }
 
-            // Sort products by price descending
-            if ("price".equals(sortPrice)) {
+            // Sort products by price
+            if ("price_asc".equals(sortPrice)) {
+                allProducts.sort(Comparator.comparingDouble(Products::getSalePrice));
+            } else if ("price_desc".equals(sortPrice)) {
                 allProducts.sort(Comparator.comparingDouble(Products::getSalePrice).reversed());
             }
 
@@ -80,4 +88,5 @@ public class ProductController extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred");
         }
     }
+
 }

@@ -30,6 +30,7 @@
                 height: auto;
                 object-fit: cover;
             }
+
             .blog-item {
                 margin-bottom: 20px;
                 text-align: center;
@@ -38,17 +39,21 @@
                 flex-direction: column;
                 justify-content: space-between;
             }
+
             .blog-item img {
                 max-width: 100%;
                 height: 250px; /* Đặt chiều cao cố định cho ảnh thumbnail */
                 object-fit: cover;
             }
+
             .blog-item h5, .blog-item p {
                 margin-top: 10px;
             }
+
             .blog-item p {
                 margin-top: 5px;
             }
+
             .hostposts {
                 display: flex;
                 flex-direction: column;
@@ -59,6 +64,31 @@
                 height: 200px; /* Điều chỉnh chiều cao tùy ý */
                 object-fit: cover;
             }
+
+            /* CSS cho latest products */
+            .product-item {
+                margin-bottom: 20px;
+                text-align: center;
+                height: 400px; /* Đặt chiều cao cố định cho các mục sản phẩm */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .product-item img {
+                max-width: 100%;
+                height: 250px; /* Đặt chiều cao cố định cho ảnh thumbnail */
+                object-fit: cover;
+            }
+
+            .product-item h5, .product-item p {
+                margin-top: 10px;
+            }
+
+            .product-item p {
+                margin-top: 5px;
+            }
+
 
         </style>
     </head>
@@ -455,8 +485,8 @@
                 </div>
               </div>
                 </section>-->
-        
-        
+
+
 
         <section id="company-services" class="padding-large">
             <div class="container">
@@ -1183,87 +1213,30 @@
         </div>
     </section>
 
-    <section id="instagram" class="padding-large">
+    <!-- latest products -->
+    <section id="latest-products">
         <div class="container">
-            <div class="text-center mb-4">
-                <h3>Products</h3>
+            <div class="section-title overflow-hidden mb-4">
+                <h3 class="d-flex align-items-center">Feature Products</h3>
             </div>
             <div class="row">
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href="./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item1.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href="./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item2.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href=./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item3.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>            
-                </div>
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href="./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item4.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>            
-                </div>
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href="./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item5.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>
-                </div>
-                <div class="col-md-2">
-                    <figure class="instagram-item position-relative rounded-3">
-                        <a href="./products" class="image-link position-relative">
-                            <div class="icon-overlay position-absolute d-flex justify-content-center">
-                                <svg class="instagram">
-                                <use xlink:href="./products"></use>
-                                </svg>
-                            </div>
-                            <img src="images/insta-item6.jpg" alt="instagram" class="img-fluid rounded-3 insta-image">
-                        </a>
-                    </figure>
-                </div>
+                <c:forEach var="product" items="${topProducts}">
+                    <div class="col-md-4">
+                        <div class="card product-item border rounded-3">
+                            <a href="./products">
+                                <img src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}" class="img-fluid thumbnail">
+                                <h5>${product.title}</h5>
+                                <p>${product.description}</p>
+                                <p>Price: ${product.salePrice}</p>
+                            </a>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </section>
+
+
 
     <jsp:include page="../common/footer.jsp"></jsp:include>
 

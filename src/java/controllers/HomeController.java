@@ -1,9 +1,10 @@
 package controllers;
 
 import daos.imples.PostDao;
+import daos.imples.ProductDao;
 import models.Post;
-import models.Slider;
 import daos.imples.SliderDao;
+import models.Products;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,26 +22,26 @@ public class HomeController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        List<Slider> sliders = null;
         List<Post> latestPosts = null;
         List<Post> hostPosts = null;
+        List<Products> topProducts = null;
 
         try {
-//            SliderDao sliderDao = new SliderDao();
-//            sliders = sliderDao.findAll();
-
             PostDao postDao = new PostDao();
-            latestPosts = postDao.getLatestPosts(3); // Lấy 6 bài đăng mới nhất
-            hostPosts = postDao.getHostPosts(4);
+            latestPosts = postDao.getLatestPosts(3); // Lấy 3 bài đăng mới nhất
+            hostPosts = postDao.getHostPosts(4); // Lấy 4 bài đăng hot
+
+            ProductDao productDao = new ProductDao();
+            topProducts = productDao.getTopProducts(6); // Lấy 6 sản phẩm mới nhất
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServletException(e);
         }
 
         // Set attributes for JSP
-        request.setAttribute("sliders", sliders);
         request.setAttribute("latestPosts", latestPosts);
         request.setAttribute("hostPosts", hostPosts);
+        request.setAttribute("topProducts", topProducts); // Add this line
 
         // Forward to homepage.jsp
         request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);

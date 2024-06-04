@@ -1,42 +1,59 @@
 <%-- 
-    Document   : postDetails
-    Created on : May 20, 2024, 4:59:27 PM
-    Author     : YOUR NAME
+    Document   : About
+    Created on : Jun 3, 2024, 9:11:28 PM
+    Author     : YOUR NAM
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TechStore</title>
+   
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Blog</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blogDetails.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blog.css">
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="author" content="">
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-hGTlJHgO8s1zAaAr8RebKZ1UorLYOaMo5HSTrKH1q0e7eosZ6GZf6XZY8jAHBNz8" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-        <style>
-            .img {
-                width: 800px;
-                height: 800px;
-                object-fit: cover; /* Đảm bảo hình ảnh được cắt để vừa khít kích thước */
-            }
-        </style>
-    </head>
-    <body>
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    
+     
+    <!-- Include header.jsp from common folder -->
+
+    <style>
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .about-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .about-section {
+            margin-bottom: 20px;
+        }
+        .about-section h3 {
+            margin-bottom: 10px;
+        }
+        .about-section p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="search" xmlns="http://www.w3.org/2000/symbolsvg" viewBox="0 0 24 24">
         <path fill="currentColor" fill-rule="evenodd" d="M11.5 2.75a8.75 8.75 0 1 0 0 17.5a8.75 8.75 0 0 0 0-17.5M1.25 11.5c0-5.66 4.59-10.25 10.25-10.25S21.75 5.84 21.75 11.5c0 2.56-.939 4.902-2.491 6.698l3.271 3.272a.75.75 0 1 1-1.06 1.06l-3.272-3.271A10.21 10.21 0 0 1 11.5 21.75c-5.66 0-10.25-4.59-10.25-10.25" clip-rule="evenodd" />
     </symbol>
@@ -107,78 +124,39 @@
         <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
     </symbol>
     </svg>
-    <jsp:include page="../common/header.jsp"></jsp:include>
-        <div class="container">
-            <div class="main-content">
-                <div class="blog-item">
-                    <img class="img" src="${post.thumbnail}" alt="${post.title}">
-                <div>
-                    <h2>${post.title}</h2>
-                    <div class="post-meta">
-                        <span>Author: ${post.authorId}</span> | 
-                        <span>Updated: <fmt:formatDate value="${updated_at}" pattern="MMMM d, yyyy"/></span> | 
-                        <span>Category: ${category}</span>
-                    </div>
-                    <div class="post-details">
-                        <p>${post.details}</p>
-                    </div>
+    <header>
+            <jsp:include page="../common/header.jsp"></jsp:include>
+    </header>
 
-                </div>
-
-            </div>
-            <%-- Hiển thị thông báo nếu không tìm thấy bài viết --%>
-            <c:if test="${not empty message}">
-                <p>${message}</p>
-            </c:if>
-
+    <main class="about-container">
+        <div class="about-title">
+            <h1>About TechStore</h1>
         </div>
-        <aside class="sidebardetails">
-            <div class="search-box">
-                <h2>Search</h2>
-                <form action="${pageContext.request.contextPath}/blogs" method="get">
-                    <input type="text" id="search-input" name="search" placeholder="Search posts by title...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
+        <div class="about-section">
+            <h3>Our Story</h3>
+            <p>Founded in 2024, TechStore started with a mission to bring the latest and greatest in technology to enthusiasts and professionals alike. Our journey began with a small team of tech lovers who wanted to make a difference in the way people experience and buy electronics. Today, TechStore is a leading name in the electronics retail industry, known for our vast selection, competitive prices, and exceptional customer service.</p>
+        </div>
+        <div class="about-section">
+            <h3>Our Mission</h3>
+            <p>At TechStore, our mission is to empower our customers with the best technology solutions that meet their needs and exceed their expectations. We strive to offer the latest products, insightful content, and dedicated support to help our customers make informed decisions and enjoy their tech purchases to the fullest.</p>
+        </div>
+        <div class="about-section">
+            <h3>Our Values</h3>
+            <p>Integrity, innovation, and customer satisfaction are at the core of everything we do at TechStore. We believe in transparency, honesty, and treating our customers with the utmost respect. Our team is constantly exploring new trends and technologies to ensure we provide the best products and services in the industry.</p>
+        </div>
+        <div class="about-section">
+            <h3>Contact Us</h3>
+            <p>If you have any questions, comments, or feedback, we'd love to hear from you. Reach out to our customer service team at <a href="mailto:support@techstore.com">support@techstore.com</a> or call us at 1-800-TECHSTORE.</p>
+        </div>
+    </main>
 
-            <div class="categories-details">
-                <h3>Categories</h3>
-                <ul class="category-list">
-                    <c:forEach var="category" items="${categories}">
-                        <li><a href="${pageContext.request.contextPath}/blogs?categoryId=${category.id}">${category.name}</a></li>
-                        </c:forEach>
-                </ul>
-            </div>
-            <div class="latest-posts-details">
-                <h2>Latest Posts</h2>
-                <ul id="latest-posts-list">
-                    <c:forEach var="latestPost" items="${latestPosts}">
-                        <li>
-                            <a href="${pageContext.request.contextPath}/post_details?id=${latestPost.id}">
-                                <!-- Hiển thị thumbnail -->
-                                <img class="thumbnail" src="${latestPost.thumbnail}" alt="${latestPost.title}">
-                                <!-- Hiển thị tiêu đề của bài viết -->
-                                ${latestPost.title}
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-
-            <div class="contacts-blogdetails">
-                <h2>Contact</h2>
-                <ul>
-                    <li>Email: hoangnam28102002@gmail.com</li>
-                    <li>Phone: (+84)99968686</li>
-                    <li><a href="https://www.facebook.com/">Contact for work</a></li>
-                </ul>
-            </div>
-        </aside>
-    </div>
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <footer>
+         <jsp:include page="../common/footer.jsp"></jsp:include>
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/script.js"></script>
+    </footer>
 </body>
 </html>
+

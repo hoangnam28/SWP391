@@ -10,6 +10,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+    <style>
+        .password-container {
+            position: relative;
+        }
+        .password-container input {
+            padding-right: 40px; /* Đảm bảo ô nhập liệu có khoảng trống đủ để chứa nút hiển thị mật khẩu */
+        }
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="../common/search.jsp"></jsp:include>
@@ -52,17 +67,18 @@
                         <div class="offcanvas-body">
                             <ul id="navbar" class="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
                                 <li class="nav-item">
-                                    <a class="nav-link me-4 active" href="./home_page">Home</a>
+                                    <a id="home-link" class="nav-link me-4" href="./home_page">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link me-4" href="#">About</a>
+                                    <a id="about-link" class="nav-link me-4" href="#">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link me-4" href="./products">Shop</a>
+                                    <a id="shop-link" class="nav-link me-4" href="./products">Shop</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link me-4" href="./blogs">Blogs</a>
+                                    <a id="blogs-link" class="nav-link me-4" href="./blogs">Blogs</a>
                                 </li>
+
                                 <li class="nav-item dropdown">
                                     <a class="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                                     <ul class="dropdown-menu animate slide border">
@@ -152,6 +168,9 @@
                                                                     <div class="form-group pb-3">
                                                                         <label class="mb-2" for="sign-in">Password *</label>
                                                                         <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
+                                                                        <c:if test="${not empty requestScope.error}">
+                                                                            <span class="text-danger">${requestScope.error}</span>
+                                                                        </c:if>
                                                                     </div>
                                                                     <label class="py-3">
                                                                         <input type="checkbox" class="d-inline">
@@ -229,12 +248,18 @@
                                         </div>
                                     </div>
 
+                                    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
                                     <script>
-                                        function doUpdate() {
-                                            if (confirm("Are you sure about this change?")) {
-                                                alert("Submit Successful");
-                                            }
-                                        }
+                                                            function validateForm() {
+                                                                var newPassword = document.getElementById("newPassword").value;
+                                                                var confirmPassword = document.getElementById("confirmPassword").value;
+                                                                if (newPassword !== confirmPassword) {
+                                                                    alert("New Password and Confirm Password do not match.");
+                                                                    return false;
+                                                                }
+                                                                return true;
+                                                            }
                                     </script>
                                 </li>
                                 <li class="wishlist-dropdown dropdown pe-3">
@@ -284,7 +309,7 @@
                                     <a href="cart.html" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                         <svg class="cart">
                                         <use xlink:href="#cart"></use>
-                                        </svg><span class="fs-6 fw-light">(02)</span>
+                                        </svg><span class="fs-6 fw-light">(0)</span>
                                     </a>
                                     <div class="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
                                         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -400,3 +425,23 @@
         </div>
     </section>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname;
+        const navLinks = {
+            '/home_page': document.getElementById('home-link'),
+            '/about': document.getElementById('about-link'),
+            '/products': document.getElementById('shop-link'),
+            '/blogs': document.getElementById('blogs-link')
+        };
+
+        Object.keys(navLinks).forEach(path => {
+            if (currentPath.includes(path)) {
+                navLinks[path].classList.add('active');
+            } else {
+                navLinks[path].classList.remove('active');
+            }
+        });
+    });
+
+</script>

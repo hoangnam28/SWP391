@@ -3,94 +3,77 @@
     <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-      
-        <link
-            href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'
-            rel='stylesheet'>
-        <link href='' rel='stylesheet'>
-        <script type='text/javascript'
-        src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <style>
             body {
-                background-position: center;
-                background-color: #eee;
-                background-repeat: no-repeat;
-                background-size: cover;
-                color: #505050;
+                background-color: #f8f9fa;
+                color: #495057;
                 font-family: "Rubik", Helvetica, Arial, sans-serif;
                 font-size: 14px;
-                font-weight: normal;
                 line-height: 1.5;
-                text-transform: none
             }
-
-            .forgot {
+            .forgot-container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 30px;
                 background-color: #fff;
-                padding: 12px;
-                border: 1px solid #dfdfdf
+                border: 1px solid #dfdfdf;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             }
-
-            .padding-bottom-3x {
-                padding-bottom: 72px !important
+            .forgot-container h2 {
+                margin-bottom: 20px;
             }
-
-            .card-footer {
-                background-color: #fff
+            .forgot-container ol {
+                padding-left: 20px;
+                margin-bottom: 20px;
             }
-
-            .btn {
-                font-size: 13px
+            .form-group {
+                margin-bottom: 20px;
             }
-
             .form-control:focus {
-                color: #495057;
-                background-color: #fff;
                 border-color: #76b7e9;
-                outline: 0;
-                box-shadow: 0 0 0 0px #28a745
+                box-shadow: 0 0 5px rgba(40, 167, 69, 0.25);
+            }
+            .alert {
+                margin-bottom: 15px;
+            }
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+            }
+            .btn {
+                padding: 10px 20px;
             }
         </style>
     </head>
-    <body oncontextmenu='return false' class='snippet-body'>
-        <div class="container padding-bottom-3x mb-2 mt-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                    <div class="forgot">
-                        <h2>Forgot your password?</h2>
-                        <p>Change your password in three easy steps. This will help you
-                            to secure your password!</p>
-                        <ol class="list-unstyled">
-                            <li><span class="text-primary text-medium">1. </span>Enter
-                                your email address below.</li>
-                            <li><span class="text-primary text-medium">2. </span>Our
-                                system will send you an OTP to your email</li>
-                            <li><span class="text-primary text-medium">3. </span>Enter the OTP on the 
-                                next page</li>
-                        </ol>
+    <body>
+        <div class="container my-5">
+            <div class="forgot-container">
+                <h2>Forgot your password?</h2>
+                  <form class="card mt-4" action="forgot-password" method="POST">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="email-for-pass">Enter your email address</label>
+                            <input class="form-control" type="email" name="email" id="email-for-pass" required>
+                            <small class="form-text text-muted">Enter the registered email address. Then we'll email an OTP to this address.</small>
+                        </div>
+                        <div class="form-group">
+                            <!-- Hi?n th? thông báo n?u có -->
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-danger">${message}</div>
+                            </c:if>
+                        </div>
                     </div>
-                    <form class="card mt-4" action="forgotPassword" method="POST">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="email-for-pass">Enter your email address</label> <input
-                                    class="form-control" type="text" name="email" id="email-for-pass" required=""><small
-                                    class="form-text text-muted">Enter the registered email address . Then we'll
-                                    email a OTP to this address.</small>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success" type="submit">Get New
-                                Password</button>
-                            <a class="btn btn-danger" href="./home_page">Back to
-                                Login</a>
-                        </div>
-                    </form>
-                </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" type="submit">Get New Password</button>
+                        <a class="btn btn-danger" href="./home_page">Back to Login</a>
+                    </div>
+                </form>
             </div>
         </div>
-        <script type='text/javascript'
-        src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
-        <script type='text/javascript' src=''></script>
-        <script type='text/javascript' src=''></script>
-        <script type='text/Javascript'></script>
-    </body>
+    </div>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+</body>
 </html>
