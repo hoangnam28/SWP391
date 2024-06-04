@@ -81,3 +81,19 @@ body {
 .categories-details ul li a:hover, .latest-posts-details ul li a:hover, .contacts-blogdetails ul li a:hover {
     text-decoration: underline;
 }
+.filter-blog .clear-filter-blog {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f7452e;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-blog .clear-filter-blog:hover {
+    background-color: #c6341b;
+}

@@ -21,108 +21,9 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./css/product.css">
 
-        <style>
-            body {
-                overflow-x: hidden;
-            }
-
-            .product-main {
-                display: flex;
-                flex-direction: column;
-                border: 1px solid gray;
-            }
-
-            .sidebar {
-                display: flex;
-                justify-content: space-between;
-                background-color: #abb0b5;
-                align-items: center;
-                padding: 15px;
-            }
-
-            .form-filter form {
-                display: flex;
-                justify-content: space-between;
-                margin-right: 10px;
-            }
-
-            .search input,
-            .category select,
-            .sortby select,
-            .filter input {
-                background-color: aliceblue;
-                padding: 5px 25px;
-                border-radius: 5px;
-            }
-
-            h3 {
-                background-color: #b7d4f1;
-                padding: 5px;
-                border-radius: 5px;
-            }
-
-
-            .card {
-                cursor: pointer;
-                margin:30px 0;
-                height: 370px;
-                width: 263px
-            }
-
-            .card:hover {
-                transform: translate(0, -5px);
-                box-shadow: 0 4px 8px 0 rgba(217, 214, 214, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                border: 1px solid #f7452e;
-            }
-
-
-
-            .main {
-                display: flex;
-                flex-wrap: wrap;
-                width: 100%;
-                text-align: center;
-                justify-content: center;
-            }
-
-            @media (max-width: 768px) {
-                .main {
-                    flex-direction: column;
-                }
-            }
-
-            .img-product img{
-                width: 100px;
-                height: 150px
-            }
-            .main .card {
-                margin-right: 25px;
-                border: 1px solid black;
-
-                padding: 20px;
-            }
-
-            a{
-                text-decoration: none;
-                color:black;
-            }
-
-            .original-price {
-                text-decoration: line-through;
-                font-size: smaller;
-            }
-            .product a {
-                color: inherit;
-            }
-
-            .title-box {
-
-                border-bottom: 2px solid #e9ecef;
-                padding-bottom: 10px;
-                margin-bottom: 20px;
-            }
-        </style>
+        
 
 
     </head>
@@ -201,162 +102,99 @@
 
     <jsp:include page="../common/header.jsp"></jsp:include>
 
-        <div class="product-main">
-            <div class="sidebar row">
-                <div class="form-filter col-9">
-                    <form action="products" method="get">
-                        <div class="search">
-                            <input type="text" name="title" id="inputSearchTitle" placeholder="Search by Title" />
-                        </div>
+        <div class="container_viewall">
+            <div class="sidebar">
+                <form action="products" method="get">
+                    <div class="search-box">
+                        <input type="text" name="search" id="inputSearchTitle" placeholder="Search by Title" value="${param.search != null ? param.search : ''}" />
+                </div>
 
+                <div class="category">
+                    <select name="category">
+                        <option value="">All Categories</option>
+                        <c:forEach var="category" items="${categories}">
+                            <option value="${category.id}" ${param.category == category.id ? 'selected' : ''}>${category.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-                        <div class="category">
-                            <select name="category">
-                                <option value="">All Categories</option>
-                            <c:forEach var="category" items="${categories}">
-                                <option value="${category.id}">${category.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div class="sortby">
-                        <select name="sort">
-                            <option value="sort by">Sort by</option>
-                            <option value="price_asc">Price Ascending</option>
-                            <option value="price_desc">Price Descending</option>
-                        </select>
-                    </div>
+                <div class="sort-options">
+                    <select name="sort">
+                        <option value="">Sort by</option>
+                        <option value="price_asc" ${param.sort == 'price_asc' ? 'selected' : ''}>Price Ascending</option>
+                        <option value="price_desc" ${param.sort == 'price_desc' ? 'selected' : ''}>Price Descending</option>
+                    </select>
+                </div>
 
-                    <div class="filter">
-                        <input type="submit" value="Filter"/>
-                    </div>
-                </form>
+                <div class="filter">
+                    <input type="submit" value="Filter"/>
+                    <a href="products" class="clear-filter">Clear Filter</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-area">
+            <div class="title-box">
+                <h3 class="title_dienthoai">TechShop Products</h3>
             </div>
-                
+
+            <div class="container-shop">
+                <div class="main-content-product">
+                    <div class="product-list d-flex justify-content-center text-center">
+                        
+                        <c:forEach var="product" items="${product}">
+                            <div class="product" style="margin: 0 30px;">
+                                <div class="card col-sm-2 ms-5 p-0 ml-3">
+                                    <div class="img-product">
+                                        <a href="productDetail.jsp?id=${product.id}" class="text-decoration-none">
+                                            <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
+                                        </a>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <p class="card-title">${product.description}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <p class="card-text text-danger">
+                                                Original Price: <span class="original-price">${product.originalPrice} $</span>
+                                            </p>
+                                            <p>Sale Price: ${product.salePrice} $
+                                                
+                                            </p>
+                                            
+                                        </div>
+                                            <p>Stock : ${product.stock}</p>
+                                    </div>
+                                        <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
+                                            <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
+                                        </a>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+                <c:if test="${empty product}">
+                    <p style="text-align: center">No products found with the specified title.</p>
+                </c:if>
+            </div>
         </div>
     </div>
 
-    <div>
-        <div class="title-box">
-            <h3 class="title_dienthoai">Highlighted Products</h3>
-        </div>
-        <div class="main">
-            <c:forEach var="product" items="${products}">
-                <div class="product">
-                    <a href="productDetail.jsp?id=${product.id}" class="text-decoration-none">
-                        <div class="card col-sm-2 ms-5 p-0 ml-3">
-                            <div class="img-product">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
-                            </div>
-                            <div class="card-body pb-0">
-                                <p class="card-title">${product.description}</p>
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text text-danger">
-                                        Original Price: <span class="original-price">${product.originalPrice} $</span>
-                                    </p></br>
-                                    <p>
-                                        Sale Price: ${product.salePrice} $
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-        <c:if test="${empty products}" >
-            <p style="text-align: center">No products found with the specified title.</p>
-        </c:if>
-    </div>
 
-    <div>
-        <div class="title-box">
-            <h3 class="title_dienthoai">Laptop</h3>
+    <!-- Pagination -->
+        <div class="text-center">
+            <ul class="pagination">
+                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="?page=1">First</a>
+                </li>
+                <c:forEach begin="1" end="${numberOfPages}" var="i">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link" href="?page=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+                <li class="page-item ${currentPage == numberOfPages ? 'disabled' : ''}">
+                    <a class="page-link" href="?page=${numberOfPages}">Last</a>
+                </li>
+            </ul>
         </div>
-        <div class="main">
-            <c:forEach var="laptop" items="${laptop}">
-                <div class="product">
-                    <a href="productDetail.jsp?id=${laptop.id}" class="text-decoration-none">
-                        <div class="card col-sm-2 ms-5 p-0 ml-3">
-                            <div class="img-product">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${laptop.thumbnail}" alt="${laptop.title}">
-                            </div>
-                            <div class="card-body pb-0">
-                                <p class="card-title">${laptop.description}</p>
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text text-danger">
-                                        Original Price: <span class="original-price">${laptop.originalPrice} $</span>
-                                    </p><br>
-                                    <p>
-                                        Sale Price: ${laptop.salePrice} 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-
-    <div>
-        <div class="title-box">
-            <h3 class="title_dienthoai">Âm Thanh</h3>
-        </div>
-        <div class="main">
-            <c:forEach var="headphone" items="${headphone}">
-                <div class="product">
-                    <a href="productDetail.jsp?id=${headphone.id}" class="text-decoration-none">
-                        <div class="card col-sm-2 ms-5 p-0 ml-3">
-                            <div class="img-product">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${headphone.thumbnail}" alt="${headphone.title}">
-                            </div>
-                            <div class="card-body pb-0">
-                                <p class="card-title">${headphone.description}</p>
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text text-danger">
-                                        Original Price: <span class="original-price">${headphone.originalPrice} $</span>
-                                    </p><br>
-                                    <p>
-                                        Sale Price: ${headphone.salePrice} 
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-
-    <div>
-        <div class="title-box">
-            <h3 class="title_dienthoai">Đồng hồ thông minh</h3>
-        </div>
-        <div class="main">
-            <c:forEach var="watch" items="${watch}">
-                <div class="product">
-                    <a href="productDetail.jsp?id=${watch.id}" class="text-decoration-none">
-                        <div class="card col-sm-2 ms-5 p-0 ml-3">
-                            <div class="img-product">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/images/${watch.thumbnail}" alt="${watch.title}">
-                            </div>
-                            <div class="card-body pb-0">
-                                <p class="card-title">${watch.description}</p>
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text text-danger">
-                                        Original Price: <span class="original-price">${watch.originalPrice} $</span>
-                                    </p><br>
-                                    <p>
-                                        Sale Price: ${watch.salePrice} $
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
 
     <div class="clearfix"></div>
 

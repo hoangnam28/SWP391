@@ -130,7 +130,7 @@
         </div>
         <!-- No posts found message -->
         <c:if test="${empty postList}">
-            <p>No posts found with the specified title.</p>
+            <p style="text-align: center">No posts found with the title "${searchQuery}".</p>
         </c:if>
     </div>
     <aside class="sidebarblog">
@@ -150,6 +150,10 @@
                 </c:forEach>
             </ul>
         </div>
+                <div class="filter">
+                    
+                    <a href="${pageContext.request.contextPath}/blogs" class="clear-filter">Clear Filter</a>
+                </div>
         <div class="latest-blog">
             <h2>Latest Posts</h2>
             <ul id="latest-blog-list">

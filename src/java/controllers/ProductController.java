@@ -21,6 +21,7 @@ public class ProductController extends HttpServlet {
 
     private ProductDao daoProductController;
     private CategoryDao categoryDao;
+    private static final int RECORDS_PER_PAGE = 8;
 
     @Override
     public void init() throws ServletException {
@@ -39,18 +40,28 @@ public class ProductController extends HttpServlet {
         String category = req.getParameter("category");
         String sortPrice = req.getParameter("sort");
         String searchByTitle = req.getParameter("title");
+        int page = 1;
+        if(req.getParameter("page") != null) {
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        int startIndex = (page - 1) * RECORDS_PER_PAGE;
 
         try {
             // Fetch all categories
             List<Category> categories = categoryDao.findAll();
             req.setAttribute("categories", categories);
 
-            // Fetch products based on category
+            // Fetch products based on category with pagination
             List<Products> allProducts;
+            int numberOfPages;
             if (category != null && !category.isEmpty()) {
-                allProducts = daoProductController.findByCategory(Integer.parseInt(category));
+                allProducts = daoProductController.findByCategoryWithPagination(Integer.parseInt(category), startIndex, RECORDS_PER_PAGE);
+                int totalProducts = daoProductController.countProductsByCategory(Integer.parseInt(category));
+                numberOfPages = (int) Math.ceil(totalProducts * 1.0 / RECORDS_PER_PAGE);
             } else {
-                allProducts = daoProductController.findAll();
+                allProducts = daoProductController.findAllWithPagination(startIndex, RECORDS_PER_PAGE);
+                int totalProducts = daoProductController.countAllProducts();
+                numberOfPages = (int) Math.ceil(totalProducts * 1.0 / RECORDS_PER_PAGE);
             }
 
             // Search products by title
@@ -70,17 +81,14 @@ public class ProductController extends HttpServlet {
                 allProducts.sort(Comparator.comparingDouble(Products::getSalePrice).reversed());
             }
 
-            req.setAttribute("products", allProducts);
-
-            List<Products> smartphone = daoProductController.findByTitle("smartphone");
-            List<Products> laptop = daoProductController.findByTitle("laptop");
-            List<Products> headphone = daoProductController.findByTitle("headphone");
-            List<Products> watch = daoProductController.findByTitle("watch");
-
-            req.setAttribute("watch", watch);
-            req.setAttribute("headphone", headphone);
-            req.setAttribute("laptop", laptop);
-            req.setAttribute("smartphone", smartphone);
+            // Set attributes for request
+            req.setAttribute("searchByDescription", searchByDescription);
+            req.setAttribute("category", category);
+            req.setAttribute("sortPrice", sortPrice);
+            req.setAttribute("searchByTitle", searchByTitle);
+            req.setAttribute("product", allProducts);
+            req.setAttribute("numberOfPages", numberOfPages);
+            req.setAttribute("currentPage", page);
 
             req.getRequestDispatcher("/screens/ProductLists.jsp").forward(req, resp);
         } catch (Exception e) {

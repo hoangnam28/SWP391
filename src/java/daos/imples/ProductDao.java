@@ -257,7 +257,90 @@ public class ProductDao extends DBContext<Products> {
     }
     return products;
 }
+    public List<Products> findByCategoryWithPagination(int categoryId, int startIndex, int recordsPerPage) {
+        List<Products> products = new ArrayList<>();
+        String sql = "SELECT * FROM products WHERE category_id = ? LIMIT ?, ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ps.setInt(2, startIndex);
+            ps.setInt(3, recordsPerPage);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Products product = new Products();
+                product.setId(rs.getInt("id"));
+                product.setTitle(rs.getString("title"));
+                product.setDescription(rs.getString("description"));
+                product.setThumbnail(rs.getString("thumbnail"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setOriginalPrice(rs.getDouble("original_price"));
+                product.setSalePrice(rs.getDouble("sale_price"));
+                product.setStock(rs.getInt("stock"));
+                product.setCreatedAt(rs.getTimestamp("created_at"));
+                product.setUpdatedAt(rs.getTimestamp("updated_at"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
 
+    public int countProductsByCategory(int categoryId) {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS count FROM products WHERE category_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public List<Products> findAllWithPagination(int startIndex, int recordsPerPage) {
+        List<Products> products = new ArrayList<>();
+        String sql = "SELECT * FROM products LIMIT ?, ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, startIndex);
+            ps.setInt(2, recordsPerPage);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Products product = new Products();
+                product.setId(rs.getInt("id"));
+                product.setTitle(rs.getString("title"));
+                product.setDescription(rs.getString("description"));
+                product.setThumbnail(rs.getString("thumbnail"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setOriginalPrice(rs.getDouble("original_price"));
+                product.setSalePrice(rs.getDouble("sale_price"));
+                product.setStock(rs.getInt("stock"));
+                product.setCreatedAt(rs.getTimestamp("created_at"));
+                product.setUpdatedAt(rs.getTimestamp("updated_at"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public int countAllProducts() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) AS count FROM products";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                count
+                        = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     
 

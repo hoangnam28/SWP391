@@ -1,0 +1,216 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 4, 2024, 1:47:21 PM
+    Author     : YOUR NAM
+*/
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.container_viewall {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.content-area {
+    flex: 3;
+}
+
+.title-box {
+    margin-bottom: 20px;
+}
+
+.title_dienthoai {
+    background-color: #b7d4f1;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.container-shop {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content-product {
+    margin-top: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    margin: 20px;
+}
+
+.card {
+    cursor: pointer;
+    margin: 30px 0;
+    height: 420px;
+    width: 263px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    border-color: #f7452e;
+}
+
+.img-product img {
+    width: 100px; /* Đổi kích thước chiều rộng thành 100px */
+    height: 150px; /* Giữ tỷ lệ khung hình */
+    margin: 10px 20px 0 40px ;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.text-danger {
+    color: #f7452e;
+}
+
+.original-price {
+    text-decoration: line-through;
+    font-size: 14px;
+    color: #999;
+}
+
+.search-box,
+.sort-options,
+.category {
+    margin-bottom: 20px;
+}
+
+.search-box input,
+.sort-options select,
+.category select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter input[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.filter .clear-filter {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f7452e;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter .clear-filter:hover {
+    background-color: #c6341b;
+}
+
+.cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: #007bff; /* Màu của icon */
+}
+
+.cart-icon i {
+    font-size: 24px; /* Kích thước của icon */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+    list-style: none;
+}
+
+.pagination .page-link {
+    padding: 5px 10px;
+
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.pagination .page-link:hover {
+    background-color: #f8f9fa;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: default;
+}
+
+.pagination .page-link:focus {
+    outline: none;
+    box-shadow: none;
+}

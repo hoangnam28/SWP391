@@ -128,7 +128,7 @@
             </div>
             <%-- Hiển thị thông báo nếu không tìm thấy bài viết --%>
             <c:if test="${not empty message}">
-                <p>${message}</p>
+                <p style="text-align: center">${message}"${searchQuery}"</p>
             </c:if>
 
         </div>
@@ -149,6 +149,10 @@
                         </c:forEach>
                 </ul>
             </div>
+                    <div class="filter-blog">
+                    
+                    <a href="${pageContext.request.contextPath}/blogs" class="clear-filter-blog">Clear Filter</a>
+                </div>
             <div class="latest-posts-details">
                 <h2>Latest Posts</h2>
                 <ul id="latest-posts-list">
