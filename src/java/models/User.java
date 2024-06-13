@@ -1,14 +1,5 @@
 package models;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author YOUR NAM
- */
 import java.sql.Timestamp;
 
 public class User {
@@ -23,11 +14,13 @@ public class User {
     private String status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private String avatar;  // Thêm thuộc tính avatar
 
     // Constructors
     public User() {}
 
-    public User(String fullName, String gender, String email, String mobile, String address, String password, String role, String status) {
+    public User(int id, String fullName, String gender, String email, String mobile, String address, String password, String role, String status, Timestamp createdAt, Timestamp updatedAt, String avatar) {
+        this.id = id;
         this.fullName = fullName;
         this.gender = gender;
         this.email = email;
@@ -36,6 +29,9 @@ public class User {
         this.password = password;
         this.role = role;
         this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.avatar = avatar;
     }
 
     // Getters and Setters
@@ -127,6 +123,14 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -141,6 +145,7 @@ public class User {
                 ", status='" + status + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

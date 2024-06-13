@@ -1,4 +1,3 @@
-// package controllers;
 package controllers;
 
 import daos.imples.AccountDao;
@@ -12,6 +11,7 @@ import models.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,21 +28,40 @@ public class LoginController extends HttpServlet {
             User user = accountDao.login(email, password);
             if (user == null) {
                 request.setAttribute("error", "Invalid email or password");
+                request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
+                return;
             } else if (!user.getStatus().equals("Active")) {
                 request.setAttribute("error", "Account inactive!");
+                request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
+                return;
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("user_id", user.getId());
-                response.sendRedirect("home_page");
+                session.setAttribute("role", user.getRole()); // Ensure the role is set
+
+                // Log session attributes
+                System.out.println("User: " + user);
+                System.out.println("User Role: " + user.getRole());
+                System.out.println("Session ID: " + session.getId());
+                Enumeration<String> attributeNames = session.getAttributeNames();
+                while (attributeNames.hasMoreElements()) {
+                    String attributeName = attributeNames.nextElement();
+                    System.out.println("Session attribute: " + attributeName + " = " + session.getAttribute(attributeName));
+                }
+
+                // Redirect based on user role
+                if ("Marketing".equals(user.getRole())) {
+                    response.sendRedirect("./customers_list");
+                } else {
+                    response.sendRedirect("./home_page");
+                }
                 return;
             }
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("isShow", true);
-            request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("error", "An error occurred. Please try again.");
+            request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
         }
     }
 
@@ -63,4 +82,6 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }
 }
+
+
 

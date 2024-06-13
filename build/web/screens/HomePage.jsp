@@ -166,7 +166,7 @@
     </svg>
 
     <jsp:include page="../common/header.jsp"></jsp:include>
-    <jsp:include page="../common/animation.jsp"></jsp:include>
+   <jsp:include page="../common/animation.jsp"></jsp:include>
 
 
         <!--    <header id="header" class="site-header">

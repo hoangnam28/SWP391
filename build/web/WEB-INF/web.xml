@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee          http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controllers.HomeController</servlet-class>
@@ -71,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>NewPassword</servlet-name>
         <url-pattern>/newPassword</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketingUserManagerController</servlet-name>
+        <servlet-class>controllers.MarketingUserManagerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketingUserManagerController</servlet-name>
+        <url-pattern>/customers_list</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home_page</welcome-file>
