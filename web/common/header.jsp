@@ -24,6 +24,12 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+          .avatar-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; /* Tùy chọn: Làm cho avatar tròn */
+
     </style>
 </head>
 <body>
@@ -132,136 +138,243 @@
                                     </c:if>
                                     <c:if test="${sessionScope.user != null}">
                                         <div class="dropdown btn-group">
-                                            <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">
+                                            <button type="button" class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown">
                                                 Welcome ${sessionScope.user.fullName} <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editProfileModal">User Profile</a></li>
                                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</a></li>
                                                 <li><a class="dropdown-item" href="logout">Logout</a></li>
                                             </ul>
                                         </div>
                                     </c:if>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0">
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="tabs-listing">
-                                                        <nav>
-                                                            <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                                                                <button class="nav-link text-uppercase active" id="nav-sign-in-tab" data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab" aria-controls="nav-sign-in" aria-selected="true">Sign In</button>
-                                                                <button class="nav-link text-uppercase" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">Register</button>
-                                                            </div>
-                                                        </nav>
-                                                        <div class="tab-content" id="nav-tabContent">
-                                                            <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
-                                                                <form action="login" method="post">
-                                                                    <div class="form-group py-3">
-                                                                        <label class="mb-2" for="sign-in">Username or email address *</label>
-                                                                        <input type="text" minlength="2" name="email" placeholder="Your Email" class="form-control w-100 rounded-3 p-3" value="${requestScope.email}" required>
-                                                                    </div>
-                                                                    <div class="form-group pb-3">
-                                                                        <label class="mb-2" for="sign-in">Password *</label>
-                                                                        <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
-                                                                        <c:if test="${not empty requestScope.error}">
-                                                                            <span class="text-danger">${requestScope.error}</span>
-                                                                        </c:if>
-                                                                    </div>
-                                                                    <label class="py-3">
-                                                                        <input type="checkbox" class="d-inline">
-                                                                        <span class="label-body">Remember me</span>
-                                                                        <span class="label-body"><a href="enterotp">Forgot Password</a></span>
-                                                                    </label>
-                                                                    <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
-                                                                </form>
-                                                            </div>
+                                </li>
 
-                                                            <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                                <!-- Modal for Sign In / Register -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header border-bottom-0">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <!-- Modal Body -->
+                                            <div class="modal-body">
+                                                <div class="tabs-listing">
+                                                    <nav>
+                                                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+                                                            <button class="nav-link text-uppercase active" id="nav-sign-in-tab" data-bs-toggle="tab" data-bs-target="#nav-sign-in" type="button" role="tab" aria-controls="nav-sign-in" aria-selected="true">Sign In</button>
+                                                            <button class="nav-link text-uppercase" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">Register</button>
+                                                        </div>
+                                                    </nav>
+                                                    <div class="tab-content" id="nav-tabContent">
+                                                        <!-- Sign In Tab -->
+                                                        <div class="tab-pane fade active show" id="nav-sign-in" role="tabpanel" aria-labelledby="nav-sign-in-tab">
+                                                            <form action="login" method="post">
                                                                 <div class="form-group py-3">
-                                                                    <label class="mb-2" for="register">Your email address *</label>
-                                                                    <input type="text" minlength="2" name="username" placeholder="Your Email Address" class="form-control w-100 rounded-3 p-3" required>
+                                                                    <label class="mb-2" for="sign-in">Username or email address *</label>
+                                                                    <input type="text" minlength="2" name="email" placeholder="Your Email" class="form-control w-100 rounded-3 p-3" value="${requestScope.email}" required>
                                                                 </div>
                                                                 <div class="form-group pb-3">
                                                                     <label class="mb-2" for="sign-in">Password *</label>
-                                                                    <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" required>
+                                                                    <input type="password" minlength="2" name="password" placeholder="Your Password" class="form-control w-100 rounded-3 p-3" value="${requestScope.password}" required>
+                                                                    <c:if test="${not empty requestScope.error}">
+                                                                        <span class="text-danger">${requestScope.error}</span>
+                                                                    </c:if>
                                                                 </div>
                                                                 <label class="py-3">
-                                                                    <input type="checkbox" required="" class="d-inline">
-                                                                    <span class="label-body">I agree to the <a href="#" class="fw-bold">Privacy Policy</a></span>
+                                                                    <input type="checkbox" class="d-inline">
+                                                                    <span class="label-body">Remember me</span>
+                                                                    <span class="label-body"><a href="enterotp">Forgot Password</a></span>
                                                                 </label>
-                                                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Register</button>
-                                                            </div>
-
+                                                                <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Login</button>
+                                                            </form>
                                                         </div>
+                                                        <!-- Register Tab -->
+                                                        <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab">
+                                                            <form id="registrationForm" action="register" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="fullName">Full Name:</label>
+                                                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="gender">Gender:</label>
+                                                                    <select class="form-control" id="gender" name="gender" required>
+                                                                        <option value="Male">Male</option>
+                                                                        <option value="Female">Female</option>
+                                                                        <option value="Other">Other</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="email">Email:</label>
+                                                                    <input type="email" class="form-control" id="email" name="email" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="mobile">Mobile:</label>
+                                                                    <input type="text" class="form-control" id="mobile" name="mobile" required>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="address">Address:</label>
+                                                                    <input type="text" class="form-control" id="address" name="address" required>
+                                                                </div>
+                                                                <div class="form-group password-container">
+                                                                    <label for="password">Password:</label>
+                                                                    <input type="password" class="form-control" id="password" name="password" required>
+                                                                    <span class="toggle-password" onclick="togglePassword('password', 'togglePasswordIcon')">
+                                                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/visible.png" alt="Show/Hide Password" id="togglePasswordIcon"/>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="form-group password-container">
+                                                                    <label for="confirmPassword">Confirm Password:</label>
+                                                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                                                    <span class="toggle-password" onclick="togglePassword('confirmPassword', 'toggleConfirmPasswordIcon')">
+                                                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/visible.png" alt="Show/Hide Password" id="toggleConfirmPasswordIcon"/>
+                                                                    </span>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Register</button>
+                                                            </form>
+                                                            <c:if test="${not empty message}">
+                                                                <div class="alert alert-info mt-3">${message}</div>
+                                                            </c:if>
+                                                        </div>
+                                                        <script>
+                                                            function togglePassword(fieldId, iconId) {
+                                                                var passwordField = document.getElementById(fieldId);
+                                                                var passwordIcon = document.getElementById(iconId);
+                                                                if (passwordField.type === 'password') {
+                                                                    passwordField.type = 'text';
+                                                                    passwordIcon.src = 'https://img.icons8.com/ios-glyphs/30/000000/invisible.png';
+                                                                } else {
+                                                                    passwordField.type = 'password';
+                                                                    passwordIcon.src = 'https://img.icons8.com/ios-glyphs/30/000000/visible.png';
+                                                                }
+                                                            }
+                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Modal for Change Password -->
-                                    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
+                                </div>
 
-                                                    <!-- Display error message -->
-                                                    <c:if test="${not empty error}">
-                                                        <div class="alert alert-danger" role="alert">
-                                                            ${error}
-                                                        </div>
-                                                    </c:if>
-
-                                                    <!-- Display success message -->
-                                                    <c:if test="${not empty success}">
-                                                        <div class="alert alert-success" role="alert">
-                                                            ${success}
-                                                        </div>
-                                                    </c:if>
-
-                                                    <form action="changepass" method="post">
-                                                        <div class="form-group py-3">
-                                                            <label class="mb-2" for="changepass">Current Pass *</label>
-                                                            <input type="password" minlength="2" name="oldPassword" placeholder="Your Old Password" class="form-control w-100 rounded-3 p-3" required>
-                                                        </div>
-                                                        <div class="form-group pb-3">
-                                                            <label class="mb-2" for="changepass">New Pass *</label>
-                                                            <input type="password" minlength="2" name="newPassword" placeholder="Your New Password" class="form-control w-100 rounded-3 p-3" required>
-                                                        </div>
-                                                        <div class="form-group pb-3">
-                                                            <label class="mb-2" for="changepass">Confirm Pass *</label>
-                                                            <input type="password" minlength="2" name="confirmPassword" placeholder="Confirm Your New Password" class="form-control w-100 rounded-3 p-3" required>
-                                                        </div>
-                                                        <button type="submit" name="submit" class="btn btn-dark w-100 my-3" onclick="doUpdate()">Change Password</button>
-                                                    </form>
-
-                                                </div>
+                                <!-- Modal for Edit Profile -->
+                                <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-bottom-0">
+                                                <h5 class="modal-title" id="editProfileModalLabel">Your Profile</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Display error message -->
+                                                <c:if test="${not empty error}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        ${error}
+                                                    </div>
+                                                </c:if>
+                                                <!-- Display success message -->
+                                                <c:if test="${not empty success}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        ${success}
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${not empty user.avatar}">
+                                                    <img src="${pageContext.request.contextPath}/uploads/${user.avatar}" alt="Avatar" class="avatar-img">
+                                                </c:if>
+                                                <form action="editProfile" method="post" enctype="multipart/form-data">
+                                                    <div class="form-group d-none">
+                                                        <label for="fullName">Full Name:</label>
+                                                        <input type="text" class="form-control" id="id" name="id" value="${user.id}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fullName">Full Name:</label>
+                                                        <input type="text" class="form-control" id="fullName" name="fullName" value="${user.fullName}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="gender">Gender:</label>
+                                                        <select class="form-control" id="gender" name="gender" required>
+                                                            <option value="Male" ${user.gender == 'Male' ? 'selected' : ''}>Male</option>
+                                                            <option value="Female" ${user.gender == 'Female' ? 'selected' : ''}>Female</option>
+                                                            <option value="Other" ${user.gender == 'Other' ? 'selected' : ''}>Other</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="mobile">Mobile:</label>
+                                                        <input type="text" class="form-control" id="mobile" name="mobile" value="${user.mobile}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="address">Address:</label>
+                                                        <input type="text" class="form-control" id="address" name="address" value="${user.address}" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="avatar">Avatar:</label>
+                                                        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*" >
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                </form>
+                                                <c:if test="${not empty message}">
+                                                    <div class="alert alert-info mt-3">${message}</div>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-                                    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
-                                    <script>
-                                                            function validateForm() {
-                                                                var newPassword = document.getElementById("newPassword").value;
-                                                                var confirmPassword = document.getElementById("confirmPassword").value;
-                                                                if (newPassword !== confirmPassword) {
-                                                                    alert("New Password and Confirm Password do not match.");
-                                                                    return false;
-                                                                }
-                                                                return true;
-                                                            }
-                                    </script>
-                                </li>
+                                <!-- Modal for Change Password -->
+                                <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-bottom-0">
+                                                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Display error message -->
+                                                <c:if test="${not empty error}">
+                                                    <div class="alert alert-danger" role="alert">
+                                                        ${error}
+                                                    </div>
+                                                </c:if>
+                                                <!-- Display success message -->
+                                                <c:if test="${not empty success}">
+                                                    <div class="alert alert-success" role="alert">
+                                                        ${success}
+                                                    </div>
+                                                </c:if>
+                                                <form action="changepass" method="post" onsubmit="return validateForm()">
+                                                    <div class="form-group py-3">
+                                                        <label class="mb-2" for="oldPassword">Current Password *</label>
+                                                        <input type="password" minlength="2" name="oldPassword" id="oldPassword" placeholder="Your Old Password" class="form-control w-100 rounded-3 p-3" required>
+                                                    </div>
+                                                    <div class="form-group pb-3">
+                                                        <label class="mb-2" for="newPassword">New Password *</label>
+                                                        <input type="password" minlength="2" name="newPassword" id="newPassword" placeholder="Your New Password" class="form-control w-100 rounded-3 p-3" required>
+                                                    </div>
+                                                    <div class="form-group pb-3">
+                                                        <label class="mb-2" for="confirmPassword">Confirm Password *</label>
+                                                        <input type="password" minlength="2" name="confirmPassword" id="confirmPassword" placeholder="Confirm Your New Password" class="form-control w-100 rounded-3 p-3" required>
+                                                    </div>
+                                                    <button type="submit" name="submit" class="btn btn-dark w-100 my-3">Change Password</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+                                <script>
+                                                    function validateForm() {
+                                                        var newPassword = document.getElementById("newPassword").value;
+                                                        var confirmPassword = document.getElementById("confirmPassword").value;
+                                                        if (newPassword !== confirmPassword) {
+                                                            alert("New Password and Confirm Password do not match.");
+                                                            return false;
+                                                        }
+                                                        return true;
+                                                    }
+                                </script>
+
                                 <li class="wishlist-dropdown dropdown pe-3">
                                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                         <svg class="wishlist">

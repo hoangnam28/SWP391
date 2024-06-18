@@ -146,7 +146,7 @@
                             <div class="product" style="margin: 0 30px;">
                                 <div class="card col-sm-2 ms-5 p-0 ml-3">
                                     <div class="img-product">
-                                        <a href="productDetail.jsp?id=${product.id}" class="text-decoration-none">
+                                        <a href="productDetails?id=${product.id}" class="text-decoration-none">
                                             <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
                                         </a>
                                     </div>

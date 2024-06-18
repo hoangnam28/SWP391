@@ -3,28 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LogoutController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/Blog.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/EnterOtp.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/WEB-INF/web.xml</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/UserDAO.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LoginController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Authorization.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/Response.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/UpdateStatusController.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/unauthorization.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/filter/BaseFilter.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/PostDao.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/MarketingCustomersList.jsp</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/nbproject/build-impl.xml</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/filter/AuthorizationFilter.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/filter/AuthenticationFilter.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Authentication.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/ForgotPassword.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Helper.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/SliderController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/ProductLists.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/header.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/ValidateOtp.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LogoutController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/Blog.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/LoginController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Authorization.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/Response.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/filter/BaseFilter.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/PostController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/filter/AuthenticationFilter.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/NewPassword.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/Authentication.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/search.jsp</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/context/DBContext.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/MarketingUserManagerController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/ProductLists.jsp</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/AccountDao.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/User.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/common/header.jsp</file>
         </group>
     </open-files>
 </project-private>

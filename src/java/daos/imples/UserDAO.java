@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends DBContext<User> {
+
     private int noOfRecords;
 
     public UserDAO() throws SQLException {
@@ -151,10 +152,10 @@ public class UserDAO extends DBContext<User> {
             avatar = null;
         }
 
-        return new User(id, fullName, gender, email, mobile, address, password, role, status, createdAt, updatedAt, avatar);
+        return new User( fullName, gender, email, mobile, address, password, role, status, avatar);
     }
 
-     @Override
+    @Override
     public User update(User user) {
         String query = "UPDATE users SET full_name = ?, gender = ?, email = ?, mobile = ?, address = ?, role = ?, status = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -172,4 +173,55 @@ public class UserDAO extends DBContext<User> {
         }
         return user;
     }
+
+    public boolean updateUser(User user) throws SQLException {
+        String query = "UPDATE users SET full_name = ?, gender = ?, mobile = ?, address = ?, avatar = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, user.getFullName());
+            stmt.setString(2, user.getGender());
+            stmt.setString(3, user.getMobile());
+            stmt.setString(4, user.getAddress());
+            stmt.setString(5, user.getAvatar());
+            stmt.setInt(6, user.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        }
+    }
+
+    public boolean verifyUser(String email) throws SQLException {
+        String query = "UPDATE users SET status = 'Active' WHERE email = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, email);
+            return statement.executeUpdate() > 0;
+        }
+    }
+    public boolean checkUserExists(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+            return false;
+        }
+    }
+    public boolean registerUser(User user) throws SQLException {
+        String query = "INSERT INTO users (full_name, gender, email, mobile, address, password, role, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, user.getFullName());
+            statement.setString(2, user.getGender());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getMobile());
+            statement.setString(5, user.getAddress());
+            statement.setString(6, user.getPassword());
+            statement.setString(7, user.getRole());
+            statement.setString(8, user.getStatus());
+            return statement.executeUpdate() > 0;
+        }
+    }
+
+
+
 }

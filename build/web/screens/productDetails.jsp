@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Product List</title>
-
+        <title>Product Details</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blogDetails.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,15 +17,96 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/product.css">
+        <style>
+            .img {
+                width: 800px;
+                height: 800px;
+                object-fit: cover; /* Đảm bảo hình ảnh được cắt để vừa khít kích thước */
+            }
+            body {
+                font-family: 'Outfit', sans-serif;
+            }
 
-        
+            .container {
+                margin-top: 20px;
+            }
 
+            .card-img-top {
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
 
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            .card-text {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .cart-icon img {
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+            }
+
+            .list-group-item {
+                font-size: 1.1rem;
+            }
+
+            .sidebar {
+                background-color: #f8f9fa;
+                padding: 15px;
+                border-radius: 5px;
+            }
+
+            .sidebar h4 {
+                margin-bottom: 20px;
+            }
+
+            .sidebar .list-group-item {
+                border: none;
+                padding-left: 0;
+            }
+
+            .sidebar .list-group-item a {
+                text-decoration: none;
+                color: #007bff;
+            }
+
+            .sidebar .list-group-item a:hover {
+                text-decoration: underline;
+            }
+
+            input.form-control {
+                border-radius: 0;
+            }
+
+            button.btn-primary {
+                border-radius: 0;
+            }
+             .original-price {
+            text-decoration: line-through; /* Gạch ngang giá gốc */
+            color: #888; /* Màu xám cho giá gốc */
+            font-size: 1rem;
+        }
+
+        .sale-price {
+            color: #e74c3c; /* Màu đỏ cho giá bán */
+            font-size: 1.2rem;
+            font-weight: bold; /* In đậm giá bán */
+        }
+        </style>
     </head>
     <body>
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -99,127 +180,67 @@
         <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
     </symbol>
     </svg>
-
     <jsp:include page="../common/header.jsp"></jsp:include>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <c:if test="${product != null}">
+                    <div class="card mb-3">
+                        <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}" style="width: 500px; height: auto;">
 
-        <div class="container_viewall">
-            <div class="sidebar">
-                <form action="products" method="get">
-                    <div class="search-box">
-                        <input type="text" name="search" id="inputSearchTitle" placeholder="Search by Title" value="${param.search != null ? param.search : ''}" />
-                </div>
-
-                <div class="category">
-                    <select name="category">
-                        <option value="">All Categories</option>
-                        <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}" ${param.category == category.id ? 'selected' : ''}>${category.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-
-                <div class="sort-options">
-                    <select name="sort">
-                        <option value="">Sort by</option>
-                        <option value="price_asc" ${param.sort == 'price_asc' ? 'selected' : ''}>Price Ascending</option>
-                        <option value="price_desc" ${param.sort == 'price_desc' ? 'selected' : ''}>Price Descending</option>
-                    </select>
-                </div>
-
-                <div class="filter">
-                    <input type="submit" value="Filter"/>
-                    <a href="products" class="clear-filter">Clear Filter</a>
-                </div>
-            </form>
-        </div>
-
-        <div class="content-area">
-            <div class="title-box">
-                <h3 class="title_dienthoai">TechShop Products</h3>
-            </div>
-
-            <div class="container-shop">
-                <div class="main-content-product">
-                    <div class="product-list d-flex justify-content-center text-center">
-                        
-                        <c:forEach var="product" items="${product}">
-                            <div class="product" style="margin: 0 30px;">
-                                <div class="card col-sm-2 ms-5 p-0 ml-3">
-                                    <div class="img-product">
-                                        <a href="productDetails?id=${product.id}" class="text-decoration-none">
-                                            <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
-                                        </a>
-                                    </div>
-                                    <div class="card-body pb-0">
-                                        <p class="card-title">${product.description}</p>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="card-text text-danger">
-                                                Original Price: <span class="original-price">${product.originalPrice} $</span>
-                                            </p>
-                                            <p>Sale Price: ${product.salePrice} $
-                                                
-                                            </p>
-                                            
-                                        </div>
-                                            <p>Stock : ${product.stock}</p>
-                                    </div>
-                                        <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
-                                            <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
-                                        </a>
-                                </div>
-                            </div>
-                        </c:forEach>
+                        <div class="card-body">
+                            <h2 class="card-title">${product.title}</h2>
+                            <p class="card-text"><strong>Mô tả:</strong> ${product.description}</p>
+                            <p class="card-text original-price"><strong>Giá gốc:</strong> ${product.originalPrice}</p>
+                            <p class="card-text sale-price"><strong>Giá bán:</strong> ${product.salePrice}</p>
+                            <p class="card-text"><strong>Số lượng trong kho:</strong> ${product.stock}</p>
+                            <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
+                                <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <c:if test="${empty product}">
-                    <p style="text-align: center">No products found with the specified title.</p>
                 </c:if>
+                <c:if test="${product == null}">
+                    <div class="alert alert-warning">
+                        Sản phẩm không tồn tại hoặc không tìm thấy.
+                    </div>
+                </c:if>
+            </div>
+            <div class="col-md-4">
+                <div class="sidebar mb-3">
+                    <form action="/productSearch" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="query">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </form>
+                    <h4>Danh mục sản phẩm</h4>
+                    <ul class="list-group">
+                        <c:forEach var="category" items="${categories}">
+                            <li class="list-group-item">
+                                <a href="./products">${category}</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                    <h4 class="mt-4">Sản phẩm mới nhất</h4>
+                    <ul class="list-group">
+                        <c:forEach var="latestProduct" items="${latestProducts}">
+                            <li class="list-group-item">
+                                <a href="productDetails?id=${latestProduct.id}">${latestProduct.title}</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-
-
-    <!-- Pagination -->
-        <div class="text-center">
-            <ul class="pagination">
-                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                    <a class="page-link" href="?page=1">First</a>
-                </li>
-                <c:forEach begin="1" end="${numberOfPages}" var="i">
-                    <li class="page-item ${currentPage == i ? 'active' : ''}">
-                        <a class="page-link" href="?page=${i}">${i}</a>
-                    </li>
-                </c:forEach>
-                <li class="page-item ${currentPage == numberOfPages ? 'disabled' : ''}">
-                    <a class="page-link" href="?page=${numberOfPages}">Last</a>
-                </li>
-            </ul>
-        </div>
-
-    <div class="clearfix"></div>
-
-    <script>
-        function redirectToHomePage() {
-            window.location.href = "HomePage.jsp";
-        }
-
-        function addToCart(productId) {
-            alert('Product ' + productId + ' added to cart!');
-        }
-
-        function feedback(productId) {
-            alert('Feedback for product ' + productId);
-        }
-    </script>
-
     <jsp:include page="../common/footer.jsp"></jsp:include>
     <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/script.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
+

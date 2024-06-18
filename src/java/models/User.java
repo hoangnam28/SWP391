@@ -19,8 +19,8 @@ public class User {
     // Constructors
     public User() {}
 
-    public User(int id, String fullName, String gender, String email, String mobile, String address, String password, String role, String status, Timestamp createdAt, Timestamp updatedAt, String avatar) {
-        this.id = id;
+    public User( String fullName, String gender, String email, String mobile, String address, String password, String role, String status, String avatar) {
+//        this.id = id;
         this.fullName = fullName;
         this.gender = gender;
         this.email = email;
@@ -29,8 +29,8 @@ public class User {
         this.password = password;
         this.role = role;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+//        this.createdAt = createdAt;
+//        this.updatedAt = updatedAt;
         this.avatar = avatar;
     }
 

@@ -17,7 +17,7 @@ import java.util.List;
 public class MarketingUserManagerController extends HttpServlet {
 
     private UserDAO userDAO;
-    
+
     @Override
     public void init() throws ServletException {
         try {
@@ -28,6 +28,38 @@ public class MarketingUserManagerController extends HttpServlet {
         }
     }
 
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        HttpSession session = request.getSession();
+//        String role = (String) session.getAttribute("role");
+//
+//        if (!"Marketing".equals(role)) {
+//            response.sendRedirect(request.getContextPath() + "/common/unauthorized.jsp");
+//            return;
+//        }
+//
+//        String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+//        String status = request.getParameter("status") != null ? request.getParameter("status") : "";
+//        String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "full_name";
+//        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+//        int pageSize = 10;
+//
+//        List<User> customers = userDAO.getUsersByRole("Customer", search, status, sort, page, pageSize);
+//        int noOfRecords = userDAO.getTotalRecords();
+//        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / pageSize);
+//
+//        if (noOfPages < 5) {
+//            noOfPages = 5;
+//        }
+//
+//        request.setAttribute("customers", customers);
+//        request.setAttribute("noOfPages", noOfPages);
+//        request.setAttribute("currentPage", page);
+//        request.setAttribute("search", search);
+//        request.setAttribute("status", status);
+//        request.setAttribute("sort", sort);
+//        request.getRequestDispatcher("/screens/MarketingCustomersList.jsp").forward(request, response);
+//    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -38,19 +70,31 @@ public class MarketingUserManagerController extends HttpServlet {
             return;
         }
 
-        String search = request.getParameter("search");
-        String status = request.getParameter("status");
+        // Get search, sort, and status parameters (handling empty values)
+        String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+        String status = request.getParameter("status") != null ? request.getParameter("status") : "Active";
         String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "full_name";
+
+        // Handle pagination
         int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         int pageSize = 10;
 
+        // Use search, sort, and status parameters (or treat them as empty if not provided)
         List<User> customers = userDAO.getUsersByRole("Customer", search, status, sort, page, pageSize);
         int noOfRecords = userDAO.getTotalRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / pageSize);
+        if (noOfPages < 5) {
+            noOfPages = 5;
+        }
 
+        // Set attributes for JSP (always set, even if empty)
         request.setAttribute("customers", customers);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
+        request.setAttribute("search", search);
+        request.setAttribute("status", status);
+        request.setAttribute("sort", sort);
+
         request.getRequestDispatcher("/screens/MarketingCustomersList.jsp").forward(request, response);
     }
 
@@ -71,7 +115,7 @@ public class MarketingUserManagerController extends HttpServlet {
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
         String mobile = request.getParameter("mobile");
-                String address = request.getParameter("address");
+        String address = request.getParameter("address");
         String password = request.getParameter("password");  // Assuming you get a password from the form
         String status = request.getParameter("status");
         String avatar = request.getParameter("avatar");
