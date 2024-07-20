@@ -28,38 +28,6 @@ public class MarketingUserManagerController extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        String role = (String) session.getAttribute("role");
-//
-//        if (!"Marketing".equals(role)) {
-//            response.sendRedirect(request.getContextPath() + "/common/unauthorized.jsp");
-//            return;
-//        }
-//
-//        String search = request.getParameter("search") != null ? request.getParameter("search") : "";
-//        String status = request.getParameter("status") != null ? request.getParameter("status") : "";
-//        String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "full_name";
-//        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-//        int pageSize = 10;
-//
-//        List<User> customers = userDAO.getUsersByRole("Customer", search, status, sort, page, pageSize);
-//        int noOfRecords = userDAO.getTotalRecords();
-//        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / pageSize);
-//
-//        if (noOfPages < 5) {
-//            noOfPages = 5;
-//        }
-//
-//        request.setAttribute("customers", customers);
-//        request.setAttribute("noOfPages", noOfPages);
-//        request.setAttribute("currentPage", page);
-//        request.setAttribute("search", search);
-//        request.setAttribute("status", status);
-//        request.setAttribute("sort", sort);
-//        request.getRequestDispatcher("/screens/MarketingCustomersList.jsp").forward(request, response);
-//    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -70,24 +38,23 @@ public class MarketingUserManagerController extends HttpServlet {
             return;
         }
 
-        // Get search, sort, and status parameters (handling empty values)
         String search = request.getParameter("search") != null ? request.getParameter("search") : "";
-        String status = request.getParameter("status") != null ? request.getParameter("status") : "Active";
+        String status = request.getParameter("status") != null ? request.getParameter("status") : "";
         String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "full_name";
-
-        // Handle pagination
         int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-        int pageSize = 10;
+        int pageSize = 5;
 
-        // Use search, sort, and status parameters (or treat them as empty if not provided)
-        List<User> customers = userDAO.getUsersByRole("Customer", search, status, sort, page, pageSize);
+        List<User> customers = userDAO.searchUsers(search, "Customer");
+        customers = userDAO.filterUsersByStatus(status, customers);
+        customers = userDAO.sortUsers(sort, customers);
+        customers = userDAO.paginateUsers(customers, page, pageSize);
+
         int noOfRecords = userDAO.getTotalRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / pageSize);
         if (noOfPages < 5) {
             noOfPages = 5;
         }
 
-        // Set attributes for JSP (always set, even if empty)
         request.setAttribute("customers", customers);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", page);
@@ -119,6 +86,7 @@ public class MarketingUserManagerController extends HttpServlet {
         String password = request.getParameter("password");  // Assuming you get a password from the form
         String status = request.getParameter("status");
         String avatar = request.getParameter("avatar");
+        
 
         User newUser = new User();
         newUser.setFullName(fullName);
@@ -136,16 +104,23 @@ public class MarketingUserManagerController extends HttpServlet {
     }
 
     private void updateStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    try {
         int id = Integer.parseInt(request.getParameter("id"));
         String status = request.getParameter("status");
 
-        User user = userDAO.findById(id);
-        if (user != null) {
-            user.setStatus(status);
-            userDAO.update(user);
+        System.out.println("Received ID: " + id); // Kiểm tra giá trị ID nhận được
+        System.out.println("Received Status: " + status); // Kiểm tra giá trị Status nhận được
+
+        boolean updated = userDAO.updateStatus(id, status);
+        if (updated) {
             response.getWriter().write("{\"success\": true}");
         } else {
             response.getWriter().write("{\"success\": false}");
         }
+    } catch (NumberFormatException e) {
+        e.printStackTrace();
+        response.getWriter().write("{\"success\": false}");
     }
+}
+
 }

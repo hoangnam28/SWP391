@@ -4,11 +4,9 @@
  */
 package models;
 
-/**
- *
- * @author YOUR NAM
- */
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
     private int id;
@@ -18,24 +16,21 @@ public class Order {
     private String receiverEmail;
     private String receiverMobile;
     private String receiverAddress;
-    private double totalCost;
+    private BigDecimal totalCost;
     private String status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private String Notes;
 
-    // Constructors
-    public Order() {}
-
-    public Order(int userId, String receiverName, String receiverGender, String receiverEmail, String receiverMobile, String receiverAddress, double totalCost, String status) {
-        this.userId = userId;
-        this.receiverName = receiverName;
-        this.receiverGender = receiverGender;
-        this.receiverEmail = receiverEmail;
-        this.receiverMobile = receiverMobile;
-        this.receiverAddress = receiverAddress;
-        this.totalCost = totalCost;
-        this.status = status;
+    public String getNotes() {
+        return Notes;
     }
+
+    public void setNotes(String Notes) {
+        this.Notes = Notes;
+    }
+    private List<OrderItem> orderItems;
+    private List<OrderAssignment> orderAssignments; // New field
 
     // Getters and Setters
     public int getId() {
@@ -94,11 +89,11 @@ public class Order {
         this.receiverAddress = receiverAddress;
     }
 
-    public double getTotalCost() {
+    public BigDecimal getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) {
+    public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
     }
 
@@ -126,20 +121,25 @@ public class Order {
         this.updatedAt = updatedAt;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public List<OrderAssignment> getOrderAssignments() {
+        return orderAssignments;
+    }
+
+    public void setOrderAssignments(List<OrderAssignment> orderAssignments) {
+        this.orderAssignments = orderAssignments;
+    }
+
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", receiverName='" + receiverName + '\'' +
-                ", receiverGender='" + receiverGender + '\'' +
-                ", receiverEmail='" + receiverEmail + '\'' +
-                ", receiverMobile='" + receiverMobile + '\'' +
-                ", receiverAddress='" + receiverAddress + '\'' +
-                ", totalCost=" + totalCost +
-                ", status='" + status + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "Order{" + "id=" + id + ", userId=" + userId + ", receiverName=" + receiverName + ", receiverGender=" + receiverGender + ", receiverEmail=" + receiverEmail + ", receiverMobile=" + receiverMobile + ", receiverAddress=" + receiverAddress + ", totalCost=" + totalCost + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", Notes=" + Notes + ", orderItems=" + orderItems + ", orderAssignments=" + orderAssignments + '}';
     }
+    
 }

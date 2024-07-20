@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class ChangePassController
@@ -31,10 +32,15 @@ public class ChangePassController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        JSONObject jsonResponse = new JSONObject();
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("user_id");
+
         if (userId == null) {
-            response.sendRedirect("./login");
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "Please log in to change your password.");
+            response.getWriter().print(jsonResponse.toString());
             return;
         }
 
@@ -45,8 +51,9 @@ public class ChangePassController extends HttpServlet {
         // Validate input
         if (oldPassword == null || newPassword == null || confirmPassword == null ||
                 oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
-            request.setAttribute("error", "All fields are required.");
-            request.getRequestDispatcher("./home_page").forward(request, response);
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "All fields are required.");
+            response.getWriter().print(jsonResponse.toString());
             return;
         }
 
@@ -55,17 +62,21 @@ public class ChangePassController extends HttpServlet {
             if (confirmPassword.equals(newPassword)) {
                 boolean success = dao.changePass(userId, newPassword);
                 if (success) {
-                    request.setAttribute("success", "Password changed successfully.");
+                    jsonResponse.put("success", true);
+                    jsonResponse.put("message", "Password changed successfully.");
                 } else {
-                    request.setAttribute("error", "Failed to change password.");
+                    jsonResponse.put("success", false);
+                    jsonResponse.put("message", "Failed to change password.");
                 }
             } else {
-                request.setAttribute("error", "New password and confirmation do not match.");
+                jsonResponse.put("success", false);
+                jsonResponse.put("message", "New password and confirmation do not match.");
             }
         } else {
-            request.setAttribute("error", "Current password is incorrect.");
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "Current password is incorrect.");
         }
 
-        request.getRequestDispatcher("./home_page").forward(request, response);
+        response.getWriter().print(jsonResponse.toString());
     }
 }

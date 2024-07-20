@@ -32,6 +32,18 @@
         <servlet-name>NewPassword</servlet-name>
         <servlet-class>utils.NewPassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartDetailController</servlet-name>
+        <servlet-class>controllers.CartDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddtoCart</servlet-name>
+        <servlet-class>controllers.AddtoCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartContactController</servlet-name>
+        <servlet-class>controllers.CartContactController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home_page</url-pattern>
@@ -79,6 +91,26 @@
     <servlet-mapping>
         <servlet-name>MarketingUserManagerController</servlet-name>
         <url-pattern>/customers_list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartDetailController</servlet-name>
+        <url-pattern>/CartDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddtoCart</servlet-name>
+        <url-pattern>/AddtoCart</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderListController</servlet-name>
+        <servlet-class>controllers.OrderListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderListController</servlet-name>
+        <url-pattern>/orders_list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartContactController</servlet-name>
+        <url-pattern>/CartContactController</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>home_page</welcome-file>

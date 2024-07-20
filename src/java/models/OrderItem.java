@@ -8,24 +8,15 @@ package models;
  *
  * @author YOUR NAM
  */
+import java.math.BigDecimal;
+
 public class OrderItem {
     private int id;
     private int orderId;
     private int productId;
     private int quantity;
-    private double price;
-    private double totalPrice;
-
-    // Constructors
-    public OrderItem() {}
-
-    public OrderItem(int orderId, int productId, int quantity, double price) {
-        this.orderId = orderId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.price = price;
-        this.totalPrice = quantity * price;
-    }
+    private BigDecimal price;
+    private BigDecimal totalPrice;
 
     // Getters and Setters
     public int getId() {
@@ -58,32 +49,27 @@ public class OrderItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.totalPrice = quantity * price; // Recalculate total price when quantity changes
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
-        this.totalPrice = quantity * price; // Recalculate total price when price changes
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
     public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", orderId=" + orderId +
-                ", productId=" + productId +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", totalPrice=" + totalPrice +
-                '}';
+        return "OrderItem{" + "id=" + id + ", orderId=" + orderId + ", productId=" + productId + ", quantity=" + quantity + ", price=" + price + ", totalPrice=" + totalPrice + '}';
     }
+    
 }
-

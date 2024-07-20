@@ -17,6 +17,7 @@ import java.util.Enumeration;
 
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -47,7 +48,17 @@ public class AuthorizationFilter implements Filter {
         System.out.println("Requested path: " + path);
         System.out.println("User role: " + userRole);
 
-        if (isProtectedPath(path) && (userRole == null || !userRole.equals("Marketing"))) {
+        if (isProtectedPath(path, "Marketing") && (userRole == null || !userRole.equals("Marketing"))) {
+            System.out.println("Unauthorized access attempt to protected path: " + path);
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/common/unauthorized.jsp");
+            return;
+        }
+        if (isProtectedPath(path, "Admin") && (userRole == null || !userRole.equals("Admin"))) {
+            System.out.println("Unauthorized access attempt to protected path: " + path);
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/common/unauthorized.jsp");
+            return;
+        }
+        if (isProtectedPath(path, "Sale") && (userRole == null || !userRole.equals("Sale"))) {
             System.out.println("Unauthorized access attempt to protected path: " + path);
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/common/unauthorized.jsp");
             return;
@@ -55,6 +66,14 @@ public class AuthorizationFilter implements Filter {
 
         if (userRole != null && userRole.equals("Marketing") && path.equals("/login")) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/screens/MarketingCustomersList.jsp");
+            return;
+        }
+        if (userRole != null && userRole.equals("Admin") && path.equals("/login")) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/screens/admin_list.jsp");
+            return;
+        }
+        if (userRole != null && userRole.equals("Sale") && path.equals("/login")) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/screens/OrderListSale.jsp");
             return;
         }
 
@@ -65,7 +84,14 @@ public class AuthorizationFilter implements Filter {
     public void destroy() {
     }
 
-    private boolean isProtectedPath(String path) {
-        return path.startsWith("/screens/MarketingCustomersList.jsp");
+    private boolean isProtectedPath(String path, String role) {
+        if ("Marketing".equals(role)) {
+            return path.startsWith("/screens/MarketingCustomersList.jsp");
+        } else if ("Admin".equals(role)) {
+            return path.startsWith("/screens/Admin.jsp");
+        } else if ("Sale".equals(role)) {
+            return path.startsWith("/screens/OrderListSale.jsp");
+        }
+        return false;
     }
 }

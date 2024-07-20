@@ -13,6 +13,15 @@ public class Products {
     private int stock;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+     private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     // Constructors
     public Products() {}

@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
-/**
- *
- * @author YOUR NAM
- */
 import java.sql.Timestamp;
 
 public class FeedBack {
+
     private int id;
     private int userId;
     private int productId;
@@ -18,15 +11,30 @@ public class FeedBack {
     private String comment;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private String userName; // New field for user's full name
 
     // Constructors
-    public FeedBack() {}
-
-    public FeedBack(int userId, int productId, int rating, String comment) {
+    public FeedBack() {
+    }
+ public FeedBack(int id, int userId, int productId, int rating, String comment, Timestamp createdAt, Timestamp updatedAt) {
+        this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.rating = rating;
         this.comment = comment;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        
+    }
+    public FeedBack(int id, int userId, int productId, int rating, String comment, Timestamp createdAt, Timestamp updatedAt, String userName) {
+        this.id = id;
+        this.userId = userId;
+        this.productId = productId;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.userName = userName;
     }
 
     // Getters and Setters
@@ -86,16 +94,25 @@ public class FeedBack {
         this.updatedAt = updatedAt;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
-        return "Feedback{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", productId=" + productId +
-                ", rating=" + rating +
-                ", comment='" + comment + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "Feedback{"
+                + "id=" + id
+                + ", userId=" + userId
+                + ", productId=" + productId
+                + ", rating=" + rating
+                + ", comment='" + comment + '\''
+                + ", createdAt=" + createdAt
+                + ", updatedAt=" + updatedAt
+                + ", userName='" + userName + '\''
+                + '}';
     }
 }

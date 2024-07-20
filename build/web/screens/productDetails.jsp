@@ -1,12 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Product Details</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/blogDetails.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="format-detection" content="telephone=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,14 +13,13 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-hGTlJHgO8s1zAaAr8RebKZ1UorLYOaMo5HSTrKH1q0e7eosZ6GZf6XZY8jAHBNz8" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+        
         <style>
             .img {
                 width: 800px;
@@ -95,20 +91,41 @@
             button.btn-primary {
                 border-radius: 0;
             }
-             .original-price {
-            text-decoration: line-through; /* Gạch ngang giá gốc */
-            color: #888; /* Màu xám cho giá gốc */
-            font-size: 1rem;
-        }
+            .original-price {
+                text-decoration: line-through; /* Gạch ngang giá gốc */
+                color: #888; /* Màu xám cho giá gốc */
+                font-size: 1rem;
+            }
 
-        .sale-price {
-            color: #e74c3c; /* Màu đỏ cho giá bán */
-            font-size: 1.2rem;
-            font-weight: bold; /* In đậm giá bán */
-        }
+            .sale-price {
+                color: #e74c3c; /* Màu đỏ cho giá bán */
+                font-size: 1.2rem;
+                font-weight: bold; /* In đậm giá bán */
+            }
+            .average-rating {
+                display: inline-block;
+                font-size: 1.2rem; /* Kích thước phù hợp */
+                color: #f8ce0b; /* Màu vàng cho sao đã điền */
+            }
+
+            .stars-outer {
+                display: inline-block;
+                font-size: 1.2rem; /* Kích thước sao */
+                color: #ccc; /* Màu xám cho sao trống */
+            }
+
+            .stars-inner {
+                white-space: nowrap;
+                overflow: hidden;
+                color: #f8ce0b; /* Màu vàng cho sao đã điền */
+            }
+
+
+
         </style>
     </head>
     <body>
+         <body>
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="search" xmlns="http://www.w3.org/2000/symbolsvg" viewBox="0 0 24 24">
         <path fill="currentColor" fill-rule="evenodd" d="M11.5 2.75a8.75 8.75 0 1 0 0 17.5a8.75 8.75 0 0 0 0-17.5M1.25 11.5c0-5.66 4.59-10.25 10.25-10.25S21.75 5.84 21.75 11.5c0 2.56-.939 4.902-2.491 6.698l3.271 3.272a.75.75 0 1 1-1.06 1.06l-3.272-3.271A10.21 10.21 0 0 1 11.5 21.75c-5.66 0-10.25-4.59-10.25-10.25" clip-rule="evenodd" />
@@ -180,67 +197,118 @@
         <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z" />
     </symbol>
     </svg>
-    <jsp:include page="../common/header.jsp"></jsp:include>
-        <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <c:if test="${product != null}">
-                    <div class="card mb-3">
-                        <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}" style="width: 500px; height: auto;">
-
-                        <div class="card-body">
-                            <h2 class="card-title">${product.title}</h2>
-                            <p class="card-text"><strong>Mô tả:</strong> ${product.description}</p>
-                            <p class="card-text original-price"><strong>Giá gốc:</strong> ${product.originalPrice}</p>
-                            <p class="card-text sale-price"><strong>Giá bán:</strong> ${product.salePrice}</p>
-                            <p class="card-text"><strong>Số lượng trong kho:</strong> ${product.stock}</p>
-                            <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
-                                <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
-                            </a>
-                        </div>
-                    </div>
-                </c:if>
-                <c:if test="${product == null}">
-                    <div class="alert alert-warning">
-                        Sản phẩm không tồn tại hoặc không tìm thấy.
-                    </div>
-                </c:if>
-            </div>
-            <div class="col-md-4">
-                <div class="sidebar mb-3">
-                    <form action="/productSearch" method="get">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="query">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+        <jsp:include page="../common/header.jsp"></jsp:include>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                    <c:if test="${product != null}">
+                        <div class="card mb-3">
+                            <img class="card-img-top" src="${pageContext.request.contextPath}/images/${product.thumbnail}" alt="${product.title}">
+                            <div class="card-body">
+                                <h2 class="card-title">${product.title}</h2>
+                                <p class="card-text"><strong>Mô tả:</strong> ${product.description}</p>
+                                <p class="card-text original-price"><strong>Giá gốc:</strong> ${product.originalPrice}</p>
+                                <p class="card-text sale-price"><strong>Giá bán:</strong> ${product.salePrice}</p>
+                                <p class="card-text"><strong>Số lượng trong kho:</strong> ${product.stock}</p>
+                                <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
+                                    <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
+                                </a>
                             </div>
                         </div>
-                    </form>
-                    <h4>Danh mục sản phẩm</h4>
-                    <ul class="list-group">
-                        <c:forEach var="category" items="${categories}">
-                            <li class="list-group-item">
-                                <a href="./products">${category}</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                    <h4 class="mt-4">Sản phẩm mới nhất</h4>
-                    <ul class="list-group">
-                        <c:forEach var="latestProduct" items="${latestProducts}">
-                            <li class="list-group-item">
-                                <a href="productDetails?id=${latestProduct.id}">${latestProduct.title}</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
+                    </c:if>
+                    <c:if test="${product == null}">
+                        <div class="alert alert-warning">
+                            Sản phẩm không tồn tại hoặc không tìm thấy.
+                        </div>
+                    </c:if>
+
+                    <!-- Reviews Section -->
+                    <div class="feedback-section">
+                        <c:if test="${not empty feedbacks}">
+                            <c:set var="totalRating" value="0" />
+                            <c:forEach var="feedback" items="${feedbacks}">
+                                <c:set var="totalRating" value="${totalRating + feedback.rating}" />
+                            </c:forEach>
+                            <c:set var="averageRating" value="${feedbacks.size() > 0 ? totalRating / feedbacks.size() : 0}" /> 
+                            </c:if>
+                        <h3>Đánh giá sản phẩm</h3>
+                        <c:if test="${feedbacks != null && !feedbacks.isEmpty()}">
+                            <div class="average-rating">
+                                <p>Điểm trung bình:</p>
+                                <div class="stars-outer">
+
+                                    <div class="stars-inner" style="width: ${averageRating * 20}%;">
+                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Tổng số bình luận: ${totalFeedback}</p>
+                            <div class="list-group">
+                                <c:forEach var="feedback" items="${feedbacks}">
+                                    <div class="list-group-item">
+                                        <h5 class="mb-1">${feedback.userName}</h5>
+
+                                        <div class="stars-outer">
+                                            <div class="stars-inner" style="width: ${feedback.rating * 20}%;">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+
+                                        <p class="mb-1">Bình luận: ${feedback.comment}</p>
+                                        <small>Posted on: <fmt:formatDate value="${feedback.createdAt}" pattern="dd/MM/yyyy"/></small>
+                                    </div>
+                                </c:forEach>
+                            </div>
+
+                        </c:if>
+                        <c:if test="${feedbacks == null || feedbacks.isEmpty()}">
+                            <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+                        </c:if>
+                    </div>
+
+                    <!-- Add Review Form -->
+
+                </div>
+                <div class="col-md-4">
+                    <div class="sidebar mb-3">
+                        <form action="/productSearch" method="get">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="query">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                                </div>
+                            </div>
+                        </form>
+                        <h4>Danh mục sản phẩm</h4>
+                        <ul class="list-group">
+                            <c:forEach var="category" items="${categories}">
+                                <li class="list-group-item">
+                                    <a href="./products">${category}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                        <h4 class="mt-4">Sản phẩm mới nhất</h4>
+                        <ul class="list-group">
+                            <c:forEach var="latestProduct" items="${latestProducts}">
+                                <li class="list-group-item">
+                                    <a href="productDetails?id=${latestProduct.id}">${latestProduct.title}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <jsp:include page="../common/footer.jsp"></jsp:include>
-    <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/script.js"></script>
-</body>
+    <script type="text/javascript" src="js/script.js"></script>
+    </body>
 </html>
-

@@ -8,10 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,48 +21,52 @@ public class LoginController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject jsonResponse = new JSONObject();
+
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            AccountDao accountDao = new AccountDao();
-            User user = accountDao.login(email, password);
-            if (user == null) {
-                request.setAttribute("error", "Invalid email or password");
-                request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
-                return;
-            } else if (!user.getStatus().equals("Active")) {
-                request.setAttribute("error", "Account inactive!");
-                request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
-                return;
+
+            if (email == null || password == null) {
+                jsonResponse.put("success", false);
+                jsonResponse.put("error", "Email or password is missing");
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                session.setAttribute("user_id", user.getId());
-                session.setAttribute("role", user.getRole()); // Ensure the role is set
+                AccountDao accountDao = new AccountDao();
+                User user = accountDao.login(email, password);
 
-                // Log session attributes
-                System.out.println("User: " + user);
-                System.out.println("User Role: " + user.getRole());
-                System.out.println("Session ID: " + session.getId());
-                Enumeration<String> attributeNames = session.getAttributeNames();
-                while (attributeNames.hasMoreElements()) {
-                    String attributeName = attributeNames.nextElement();
-                    System.out.println("Session attribute: " + attributeName + " = " + session.getAttribute(attributeName));
-                }
-
-                // Redirect based on user role
-                if ("Marketing".equals(user.getRole())) {
-                    response.sendRedirect("./customers_list");
+                if (user == null) {
+                    jsonResponse.put("success", false);
+                    jsonResponse.put("error", "Invalid email or password");
+                } else if (!user.getStatus().equals("Active")) {
+                    jsonResponse.put("success", false);
+                    jsonResponse.put("error", "Account inactive!");
                 } else {
-                    response.sendRedirect("./home_page");
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    session.setAttribute("user_id", user.getId());
+                    session.setAttribute("role", user.getRole());
+
+                    if ("Marketing".equals(user.getRole())) {
+                        jsonResponse.put("redirectUrl", "./customers_list");
+                    } else if ("Admin".equals(user.getRole())) {
+                        jsonResponse.put("redirectUrl", "./admin_list");
+                    } else if ("Sale".equals(user.getRole())) {
+                        jsonResponse.put("redirectUrl", "./orders_list");
+                    } else {
+                        jsonResponse.put("redirectUrl", "./home_page");
+                    }
+                    jsonResponse.put("success", true);
                 }
-                return;
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("error", "An error occurred. Please try again.");
-            request.getRequestDispatcher("/screens/HomePage.jsp").forward(request, response);
+            jsonResponse.put("success", false);
+            jsonResponse.put("error", "An error occurred during login process");
+        } finally {
+            out.print(jsonResponse.toString());
+            out.flush();
         }
     }
 
@@ -82,6 +87,3 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }
 }
-
-
-

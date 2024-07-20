@@ -9,17 +9,69 @@ package models;
  * @author YOUR NAM
  */
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cart {
+
     private int id;
     private int userId;
     private double totalCost;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private List<CartItem> cart_item;
 
     // Constructors
-    public Cart() {}
+    public Cart() {
+        cart_item = new ArrayList<>();
+    }
 
+    public List<CartItem> getCart_item() {
+        return cart_item;
+    }
+
+    public void setCart_item(List<CartItem> cart_item) {
+        this.cart_item = cart_item;
+    }
+
+    public int getQuantityByID(int id) {
+        return getCartItemByID(id).getQuantity();
+    }
+
+    private CartItem getCartItemByID(int id) {
+        for (CartItem cartItem : cart_item) {
+            if (cartItem.getProduct().getId() == id) {
+                return cartItem;
+            }
+        }
+        return null;
+    }
+
+    //add item vao cart 
+    public void addCartItem(CartItem t) {
+        if(getCartItemByID(t.getProduct().getId())!= null){
+            CartItem m = getCartItemByID(t.getProduct().getId());
+            m.setQuantity(m.getQuantity() + t.getQuantity());
+        }else{
+            cart_item.add(t);
+        }
+    }
+    
+    public void removeCartItem(int id){
+        if(getCartItemByID(id)!= null){
+            cart_item.remove(getCartItemByID(id));
+        }
+    }
+
+    public double getTotalMoney(){
+        double t = 0;
+        for (CartItem cartItem : cart_item) {
+            t+= (cartItem.getQuantity()*cartItem.getProduct().getSalePrice());
+            
+        }
+        return t;
+    }
+    
     public Cart(int userId, double totalCost) {
         this.userId = userId;
         this.totalCost = totalCost;
@@ -68,12 +120,12 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", totalCost=" + totalCost +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "Cart{"
+                + "id=" + id
+                + ", userId=" + userId
+                + ", totalCost=" + totalCost
+                + ", createdAt=" + createdAt
+                + ", updatedAt=" + updatedAt
+                + '}';
     }
 }

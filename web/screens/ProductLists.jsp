@@ -105,9 +105,7 @@
         <div class="container_viewall">
             <div class="sidebar">
                 <form action="products" method="get">
-                    <div class="search-box">
-                        <input type="text" name="search" id="inputSearchTitle" placeholder="Search by Title" value="${param.search != null ? param.search : ''}" />
-                </div>
+                    
 
                 <div class="category">
                     <select name="category">
@@ -137,7 +135,7 @@
             <div class="title-box">
                 <h3 class="title_dienthoai">TechShop Products</h3>
             </div>
-
+            <form name ="f" action="products" method="get">
             <div class="container-shop">
                 <div class="main-content-product">
                     <div class="product-list d-flex justify-content-center text-center">
@@ -163,9 +161,8 @@
                                         </div>
                                             <p>Stock : ${product.stock}</p>
                                     </div>
-                                        <a href="addToCart.jsp?productId=${product.id}" class="cart-icon">
-                                            <img src="${pageContext.request.contextPath}/images/cart-icon.jpg" alt="Add to Cart">
-                                        </a>
+                                      <a href="AddtoCart?productId=${product.id}&quantity=1">Add to cart</a>
+<!--                                            <input type="submit" onclick="buy('${product.id}')" value="BUY ITEM">-->
                                 </div>
                             </div>
                         </c:forEach>
@@ -175,6 +172,7 @@
                     <p style="text-align: center">No products found with the specified title.</p>
                 </c:if>
             </div>
+                </form>
         </div>
     </div>
 
@@ -198,7 +196,12 @@
 
     <div class="clearfix"></div>
 
-    <script>
+    <script type="text/javascript">
+        function buy(id){
+            document.f.action ="buy?id=" +id;
+            document.f.submit();
+        }
+        
         function redirectToHomePage() {
             window.location.href = "HomePage.jsp";
         }

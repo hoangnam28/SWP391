@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controllers;
 
 import daos.imples.UserDAO;
@@ -9,6 +5,7 @@ import models.User;
 import utils.EmailSender;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +16,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 @WebServlet("/register")
 public class Register extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(Register.class.getName());
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject jsonResponse = new JSONObject();
+
         String fullName = request.getParameter("fullName");
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
@@ -35,55 +40,64 @@ public class Register extends HttpServlet {
         String role = "Customer";
         String status = "Inactive";
 
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("message", "Confirm password incorrect");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
-            return;
-        }
-
-        // Kiểm tra định dạng email và số điện thoại di động
-        if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-            request.setAttribute("message", "Invalid email format");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
-            return;
-        }
-
-        if (!mobile.matches("^0[0-9]{9}$")) {
-            request.setAttribute("message", "Mobile number must start with 0 and be 10 digits long");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
-            return;
-        }
-
-        if (password.length() != 8) {
-            request.setAttribute("message", "Password must be exactly 8 characters long");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
-            return;
-        }
-
-        User user = new User( fullName, gender, email, mobile, address, password, role, status, null);
+        logger.info("Received registration request: " + email);
 
         try {
-            UserDAO userDAO = new UserDAO();
-            boolean result = userDAO.registerUser(user);
-            if (result) {
-                String verificationLink = "http://localhost:8080/tech_store/verify?email=" + email;
-                EmailSender.sendVerificationEmail(email, verificationLink);
-                request.setAttribute("message", "Registration successful. Please check your email for verification.");
-                request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
+            if (!password.equals(confirmPassword)) {
+                jsonResponse.put("success", false);
+                jsonResponse.put("message", "Confirm password incorrect");
+            } else if (!email.matches("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                jsonResponse.put("success", false);
+                jsonResponse.put("message", "Invalid email format");
+            } else if (!mobile.matches("^0[0-9]{9}$")) {
+                jsonResponse.put("success", false);
+                jsonResponse.put("message", "Mobile number must start with 0 and be 10 digits long");
+            } else if (password.length() != 8) {
+                jsonResponse.put("success", false);
+                jsonResponse.put("message", "Password must be exactly 8 characters long");
             } else {
-                request.setAttribute("message", "User already exists");
-                request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
+                User user = new User(fullName, gender, email, mobile, address, password, role, status, null);
+                UserDAO userDAO = new UserDAO();
+                boolean result = userDAO.registerUser(user);
+
+                if (result) {
+                    String verificationLink = "http://localhost:8080/tech_store/verify?email=" + email;
+                    EmailSender.sendVerificationEmail(email, verificationLink);
+                    jsonResponse.put("success", true);
+                    jsonResponse.put("message", "Registration successful. Please check your email for verification.");
+                } else {
+                    jsonResponse.put("success", false);
+                    jsonResponse.put("message", "User already exists");
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("message", "An error occurred");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
+            logger.log(Level.SEVERE, "SQL Exception during registration", e);
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "An error occurred: " + e.getMessage());
         } catch (MessagingException ex) {
-            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "Error while sending verification email");
-            request.getRequestDispatcher("screens/HomePage.jsp").forward(request, response);
+            logger.log(Level.SEVERE, "Messaging Exception during registration", ex);
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "Error while sending verification email: " + ex.getMessage());
+        } finally {
+            out.print(jsonResponse.toString());
+            out.flush();
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Register servlet";
+    }
 }
-
-

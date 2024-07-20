@@ -15,7 +15,7 @@ public class ProductDao extends DBContext<Products> {
     public ProductDao() throws SQLException {
         super();
     }
-    
+
     public List<Products> findByTitle(String title) {
         List<Products> products = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE title LIKE ?";
@@ -67,7 +67,7 @@ public class ProductDao extends DBContext<Products> {
         }
         return products;
     }
-    
+
     @Override
     public List<Products> findAll() {
         List<Products> products = new ArrayList<>();
@@ -152,6 +152,7 @@ public class ProductDao extends DBContext<Products> {
         }
         return model;
     }
+
     public List<Products> findByDescription(String description) {
         List<Products> products = new ArrayList<>();
         String query = "SELECT * FROM products WHERE LOWER(description) LIKE ?";
@@ -187,7 +188,7 @@ public class ProductDao extends DBContext<Products> {
         }
         return false;
     }
-    
+
     public Products insert(Products model) {
         String sql = "INSERT INTO products (title, description, thumbnail, category_id, original_price, sale_price, stock, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
         try (PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -208,6 +209,7 @@ public class ProductDao extends DBContext<Products> {
         }
         return model;
     }
+
     public List<Products> getTopProducts(int limit) {
         List<Products> products = new ArrayList<>();
         String sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT ?";
@@ -233,30 +235,32 @@ public class ProductDao extends DBContext<Products> {
         }
         return products;
     }
+
     public List<Products> findByPriceOrder(String order) {
-    List<Products> products = new ArrayList<>();
-    String sql = "SELECT * FROM products ORDER BY sale_price " + order;
-    try (PreparedStatement ps = connection.prepareStatement(sql)) {
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Products product = new Products();
-            product.setId(rs.getInt("id"));
-            product.setTitle(rs.getString("title"));
-            product.setDescription(rs.getString("description"));
-            product.setThumbnail(rs.getString("thumbnail"));
-            product.setCategoryId(rs.getInt("category_id"));
-            product.setOriginalPrice(rs.getDouble("original_price"));
-            product.setSalePrice(rs.getDouble("sale_price"));
-            product.setStock(rs.getInt("stock"));
-            product.setCreatedAt(rs.getTimestamp("created_at"));
-            product.setUpdatedAt(rs.getTimestamp("updated_at"));
-            products.add(product);
+        List<Products> products = new ArrayList<>();
+        String sql = "SELECT * FROM products ORDER BY sale_price " + order;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Products product = new Products();
+                product.setId(rs.getInt("id"));
+                product.setTitle(rs.getString("title"));
+                product.setDescription(rs.getString("description"));
+                product.setThumbnail(rs.getString("thumbnail"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setOriginalPrice(rs.getDouble("original_price"));
+                product.setSalePrice(rs.getDouble("sale_price"));
+                product.setStock(rs.getInt("stock"));
+                product.setCreatedAt(rs.getTimestamp("created_at"));
+                product.setUpdatedAt(rs.getTimestamp("updated_at"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return products;
     }
-    return products;
-}
+
     public List<Products> findByCategoryWithPagination(int categoryId, int startIndex, int recordsPerPage) {
         List<Products> products = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE category_id = ? LIMIT ?, ?";
@@ -342,8 +346,6 @@ public class ProductDao extends DBContext<Products> {
         return count;
     }
 
-    
-
     @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
@@ -378,6 +380,130 @@ public class ProductDao extends DBContext<Products> {
             e.printStackTrace();
         }
         return products;
+    }
+
+    public boolean deleteById1(int id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Products> findProducts(String category, String search, String sortBy, int page, int pageSize) throws SQLException {
+        List<Products> products = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT p.*, c.name as category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE 1=1");
+
+        if (category != null && !category.isEmpty()) {
+            sql.append(" AND c.id = ?");
+        }
+
+        if (search != null && !search.isEmpty()) {
+            sql.append(" AND p.title LIKE ?");
+        }
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql.append(" ORDER BY ").append(sortBy);
+        }
+
+        // Add LIMIT and OFFSET for pagination
+        sql.append(" LIMIT ? OFFSET ?");
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            int paramIndex = 1;
+            if (category != null && !category.isEmpty()) {
+                ps.setString(paramIndex++, category);
+            }
+            if (search != null && !search.isEmpty()) {
+                ps.setString(paramIndex++, "%" + search + "%");
+            }
+            ps.setInt(paramIndex++, pageSize);
+            ps.setInt(paramIndex, (page - 1) * pageSize);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Products product = new Products();
+                product.setId(rs.getInt("id"));
+                product.setTitle(rs.getString("title"));
+                product.setDescription(rs.getString("description"));
+                product.setThumbnail(rs.getString("thumbnail"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setOriginalPrice(rs.getDouble("original_price"));
+                product.setSalePrice(rs.getDouble("sale_price"));
+                product.setStock(rs.getInt("stock"));
+                product.setCategoryName(rs.getString("category_name"));
+
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
+    public int countProducts(String category, String search) throws SQLException {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE 1=1");
+
+        if (category != null && !category.isEmpty()) {
+            sql.append(" AND c.name = ?");
+        }
+        if (search != null && !search.isEmpty()) {
+            sql.append(" AND p.title LIKE ?");
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            int paramIndex = 1;
+            if (category != null && !category.isEmpty()) {
+                ps.setString(paramIndex++, category);
+            }
+            if (search != null && !search.isEmpty()) {
+                ps.setString(paramIndex++, "%" + search + "%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public Products getProductById(int id) {
+        Products product = null;
+        String sql = "SELECT * FROM products WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                product = new Products();
+                product.setId(rs.getInt("id"));
+                product.setTitle(rs.getString("title"));
+                product.setDescription(rs.getString("description"));
+                product.setThumbnail(rs.getString("thumbnail"));
+                product.setCategoryId(rs.getInt("category_id"));
+                product.setOriginalPrice(rs.getDouble("original_price"));
+                product.setSalePrice(rs.getDouble("sale_price"));
+                product.setStock(rs.getInt("stock"));
+                product.setCreatedAt(rs.getTimestamp("created_at"));
+                product.setUpdatedAt(rs.getTimestamp("updated_at"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+    public boolean updateProductQuantity(int productId, int quantity) {
+        String query = "UPDATE products SET stock = stock - ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, quantity);
+            ps.setInt(2, productId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

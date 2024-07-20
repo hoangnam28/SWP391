@@ -15,6 +15,7 @@ public class CartItem {
     private int quantity;
     private double price;
     private double totalPrice;
+     private Products product;
 
     // Constructors
     public CartItem() {}
@@ -27,6 +28,15 @@ public class CartItem {
         this.totalPrice = quantity * price;
     }
 
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    
     // Getters and Setters
     public int getId() {
         return id;
@@ -73,6 +83,11 @@ public class CartItem {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
 
     @Override
     public String toString() {
