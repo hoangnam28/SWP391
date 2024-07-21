@@ -17,6 +17,8 @@ public class OrderItem {
     private int quantity;
     private BigDecimal price;
     private BigDecimal totalPrice;
+    private Order order;
+    private Products product;
 
     // Getters and Setters
     public int getId() {
@@ -66,6 +68,23 @@ public class OrderItem {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+    
 
     @Override
     public String toString() {

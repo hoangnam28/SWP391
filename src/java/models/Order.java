@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class Order {
+
     private int id;
     private int userId;
     private String receiverName;
@@ -21,6 +22,105 @@ public class Order {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private String Notes;
+    private int quantity;
+    private BigDecimal price;
+    private BigDecimal totalPrice;
+    private String productTitle;
+    private String productThumbnail;
+    private int saleId;
+    private String saleName;
+    private Products productEnt;
+
+    public Products getProductEnt() {
+        return productEnt;
+    }
+
+    public void setProductEnt(Products productEnt) {
+        this.productEnt = productEnt;
+    }
+
+    public Order() {
+    }
+
+    public Order(int id, int userId, String receiverName, String receiverGender, String receiverEmail, String receiverMobile, String receiverAddress, BigDecimal totalCost, String status, Timestamp createdAt, Timestamp updatedAt, String Notes, int quantity, BigDecimal price, BigDecimal totalPrice, String productTitle, String productThumbnail, int saleId, String saleName, List<OrderItem> orderItems, List<OrderAssignment> orderAssignments) {
+        this.id = id;
+        this.userId = userId;
+        this.receiverName = receiverName;
+        this.receiverGender = receiverGender;
+        this.receiverEmail = receiverEmail;
+        this.receiverMobile = receiverMobile;
+        this.receiverAddress = receiverAddress;
+        this.totalCost = totalCost;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.Notes = Notes;
+        this.quantity = quantity;
+        this.price = price;
+        this.totalPrice = totalPrice;
+        this.productTitle = productTitle;
+        this.productThumbnail = productThumbnail;
+        this.saleId = saleId;
+        this.saleName = saleName;
+        this.orderItems = orderItems;
+        this.orderAssignments = orderAssignments;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
+    }
+
+    public String getProductThumbnail() {
+        return productThumbnail;
+    }
+
+    public void setProductThumbnail(String productThumbnail) {
+        this.productThumbnail = productThumbnail;
+    }
+
+    public int getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(int saleId) {
+        this.saleId = saleId;
+    }
+
+    public String getSaleName() {
+        return saleName;
+    }
+
+    public void setSaleName(String saleName) {
+        this.saleName = saleName;
+    }
 
     public String getNotes() {
         return Notes;
@@ -141,5 +241,5 @@ public class Order {
     public String toString() {
         return "Order{" + "id=" + id + ", userId=" + userId + ", receiverName=" + receiverName + ", receiverGender=" + receiverGender + ", receiverEmail=" + receiverEmail + ", receiverMobile=" + receiverMobile + ", receiverAddress=" + receiverAddress + ", totalCost=" + totalCost + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", Notes=" + Notes + ", orderItems=" + orderItems + ", orderAssignments=" + orderAssignments + '}';
     }
-    
+
 }

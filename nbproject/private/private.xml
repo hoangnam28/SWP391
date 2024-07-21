@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/CartDetailDAO.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/OrderController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/daos/imples/OrderDao.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/models/Order.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/OrderListSale.jsp</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/CartCompletionController.java</file>
-            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/CartCompletion.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/OrderController.java</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/OrderDetailSale.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/web/screens/ProductLists.jsp</file>
+            <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/controllers/OrderListController.java</file>
             <file>file:/D:/SWP_Projectnew/SWP_new/SWP391/src/java/utils/EmailSender.java</file>
         </group>
     </open-files>

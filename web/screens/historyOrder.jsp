@@ -252,10 +252,10 @@
                     <table id="orderTable" class="table table-striped table-bordered">
                         <thead>
                             <tr class="text-uppercase">
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Subtotal</th>
+                                <th>Order Code</th>
+                                <th>ReceiverName</th>
+                                <th>Email</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -264,13 +264,13 @@
                         <c:forEach var="order" items="${orders}">
                             <tr>
                                 <td>
-                                    <a href="productDetails?id=${order.productId}" class="text-decoration-none">
+                                    <a href="productDetails?id=" class="text-decoration-none">
                                         <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
                                             <div class="col-lg-7">
                                                 <div class="card-detail">
-                                                    <h5 class="mt-2">${order.product}</h5>
+                                                    <h5 class="mt-2">$ORDER ${order.id}</h5>
                                                     <div class="card-price">
-                                                        <span class="price text-primary fw-light" data-currency-usd="${order.price}">$${order.price}</span>
+                                                        <span class="price text-primary fw-light" data-currency-usd="${order.totalCost}">$${order.totalCost}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -278,13 +278,13 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <span>${order.quantity}</span>
+                                    <span>${order.receiverName}</span>
                                 </td>
                                 <td>
-                                    <span class="money fs-2 fw-light text-primary">$${order.price}</span>
+                                    <span class="money fs-2 fw-light text-primary">${order.receiverEmail}</span>
                                 </td>
                                 <td>
-                                    <span class="money fs-2 fw-light text-primary">$${order.totalCost}</span>
+                                    <span class="money fs-2 fw-light text-primary">${order.receiverMobile}</span>
                                 </td>
                                 <td>
                                     <span class="badge ${order.status == 'completed' ? 'bg-success' : 'bg-warning'}">

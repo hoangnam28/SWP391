@@ -13,8 +13,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import models.Order;
+import models.OrderItem;
 import models.User;
 
 /**
@@ -75,10 +77,13 @@ public class HistoryOrderController extends HttpServlet {
             switch (action) {
                 case "view":
                     int oId = Integer.parseInt(request.getParameter("id"));
-                    Order order = orderDao.getOrdersById(oId);
-                    request.setAttribute("order", order);
+                    ArrayList<OrderItem> order = orderDao.getOrderById(oId);
+                    Order o = orderDao.getOrdersByUserIdByOrderId(oId);
+                    request.setAttribute("o", o);
+                    request.setAttribute("orders", order);
                     request.getRequestDispatcher("/screens/detailOrder.jsp").forward(request, response);
                     break;
+
                 default:
                     List<Order> orders = orderDao.getOrdersByUserId(user.getId());
                     request.setAttribute("orders", orders);

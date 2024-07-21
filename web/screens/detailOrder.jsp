@@ -250,15 +250,15 @@
             <div class="container mt-5">
                 <div class="recipient-info mb-4">
                     <h4>Recipient Information</h4>
-                    <p><strong>Name:</strong> ${order.receiverName}</p>
-                <p><strong>Address:</strong> ${order.receiverAddress}</p>
-                <p><strong>Email:</strong> ${order.receiverEmail}</p>
-                <p><strong>Phone:</strong> ${order.receiverMobile}</p>
-                <p><strong>Total Cost:</strong> $${order.totalCost}</p>
-                <p><strong>Order Date:</strong> <fmt:formatDate value="${order.createdAt}" pattern="dd/MM/yyyy HH:mm:ss" /></p>
-                <p><strong>Update status Date:</strong> <fmt:formatDate value="${order.updatedAt}" pattern="dd/MM/yyyy HH:mm:ss" /></p>
-                <p><strong>Status:</strong> <span class="btn btn-danger">${order.status}</span></p>
-                <p><strong>Note: </strong> <span class="btn btn-info">${order.notes}</span></p>
+                    <p><strong>Name:</strong> ${o.receiverName}</p>
+                <p><strong>Address:</strong> ${o.receiverAddress}</p>
+                <p><strong>Email:</strong> ${o.receiverEmail}</p>
+                <p><strong>Phone:</strong> ${o.receiverMobile}</p>
+                <p><strong>Total Cost:</strong> $${o.totalCost}</p>
+                <p><strong>Order Date:</strong> <fmt:formatDate value="${o.createdAt}" pattern="dd/MM/yyyy HH:mm:ss" /></p>
+                <p><strong>Update status Date:</strong> <fmt:formatDate value="${o.updatedAt}" pattern="dd/MM/yyyy HH:mm:ss" /></p>
+                <p><strong>Status:</strong> <span class="btn btn-danger">${o.status}</span></p>
+                <p><strong>Note: </strong> <span class="btn btn-info">${o.notes}</span></p>
             </div>
 
             <div class="order-products">
@@ -275,19 +275,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <a href="productDetails?id=${order.productId}">${order.product}</a></td>
-                            <td>
-                                <img src="<%=request.getContextPath()%>/images/${order.productEntity.thumbnail}" width="150px" height="height" alt="alt"/>
-                            </td>
-                            <td>${order.quantity}</td>
-                            <td>$${order.price}</td>
-                            <td>$${order.totalPrice}</td>
-                            <td>
-                                <a href="AddtoCart?productId=${order.productId}&amp;quantity=1" class="btn btn-warning">Rebuy</a>
-                            </td>
-                        </tr>
+                        <c:forEach items="${orders}" var="orItem">
+                            <tr>
+                                <td>
+                                    <a href="productDetails?id=${orItem.productId}">${orItem.product.title}</a>
+                                </td>
+                                <td>
+                                    <img src="${pageContext.request.contextPath}/images/${orItem.product.thumbnail}" width="150px" alt="Product Image"/>
+                                </td>
+                                <td>${orItem.quantity}</td>
+                                <td>${orItem.price}</td>
+                                <td>${orItem.totalPrice}</td>
+                                <td>
+                                    <a href="AddtoCart?productId=${orItem.productId}&amp;quantity=1" class="btn btn-warning">Rebuy</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

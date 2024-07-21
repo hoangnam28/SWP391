@@ -22,12 +22,12 @@
                     <p><strong>Address:</strong> ${order.receiverAddress}</p>
                     <p><strong>Order Date:</strong> ${order.createdAt}</p>
                     <p><strong>Total Cost:</strong> ${order.totalCost}</p>
-                    <p><strong>Sale User ID:</strong> ${order.saleUserId}</p>
-                    <p><strong>Sale User Name:</strong> ${order.saleUserName}</p>
-                    <p><strong>Product:</strong> ${order.product}</p>
+                    <p><strong>Sale User ID:</strong> ${order.saleId}</p>
+                    <p><strong>Sale User Name:</strong> ${order.saleName}</p>
+                    <p><strong>Product:</strong> ${order.productTitle}</p>
                     <p><strong>Product Thumbnail:</strong></p>
                     <img class="card-img-top" src="${pageContext.request.contextPath}/images/${order.productThumbnail}" alt="Product Thumbnail" style="max-width: 250px;">
-                    <p><strong>Other Products:</strong> ${order.otherProducts}</p>
+                  
                     <p><strong>Quantity:</strong> ${order.quantity}</p>
                     <p><strong>Price:</strong> ${order.price}</p>
                     <p><strong>Total Price:</strong> ${order.totalPrice}</p>
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <c:if test="${user.role == 'Sale Manager' || user.id == order.saleUserId}">
+            <c:if test="${user.role == 'Sale Manager' || user.id == order.saleId}">
                 <div class="card mt-4">
                     <div class="card-body">
                         <h3 class="card-title">Update Order Status</h3>
@@ -59,7 +59,7 @@
                                 <label for="saleUserId">Assign to Sales User</label>
                                 <select class="form-control" id="saleUserId" name="saleUserId">
                                     <c:forEach var="saleUser" items="${saleUsers}">
-                                        <option value="${saleUser.id}" ${order.saleUserId == saleUser.id ? 'selected' : ''}>${saleUser.fullName}</option>
+                                        <option value="${saleUser.id}" ${order.saleId == saleUser.id ? 'selected' : ''}>${saleUser.fullName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -77,5 +77,3 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
-
-

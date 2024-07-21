@@ -50,121 +50,125 @@ public class CartCompletionController extends HttpServlet {
     }
 
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    HttpSession session = request.getSession();
-    User user = (User) session.getAttribute("user");
-    if (user == null) {
-        response.sendRedirect(request.getContextPath() + "/?error=You must login");
-        return;
-    }
-
-    int idUser = user.getId();
-    List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
-    if (cartItems == null || cartItems.isEmpty()) {
-        response.sendRedirect(request.getContextPath() + "/?cart=Empty");
-        return;
-    }
-
-    System.out.println("Cart items: " + cartItems);
-    int cartId = cartItems.get(0).getCartId();
-
-    double totalCost = 0.0;
-    for (CartItem cartItem : cartItems) {
-        totalCost += cartItem.getTotalPrice();
-    }
-
-    for (CartItem cartItem : cartItems) {
-        int productId = cartItem.getProductId();
-        int quantity = cartItem.getQuantity();
-        productDao.updateProductQuantity(productId, -quantity); // Adjust quantity correctly
-    }
-
-    Order order = new Order();
-    order.setUserId(idUser);
-    order.setTotalCost(BigDecimal.valueOf(totalCost));
-    order.setStatus("Submitted"); // Set a default status
-    orderDao.createOrder(order); // Assuming createOrder inserts the order and sets its ID
-
-    int orderId = order.getId(); // Retrieve the generated order ID
-
-    for (CartItem cartItem : cartItems) {
-        Integer productId = cartItem.getProductId();
-        Integer quantity = cartItem.getQuantity();
-        Double totalPrice = cartItem.getTotalPrice();
-
-        if (productId == null || quantity == null || totalPrice == null) {
-            System.out.println("Null values in cartItem: " + cartItem);
-            continue;
-        }
-
-        System.out.println("Creating order item with orderId: " + orderId + ", productId: " + productId + ", quantity: " + quantity + ", totalPrice: " + totalPrice);
-        orderDao.createOrderItem(orderId, productId, quantity, totalPrice);
-    }
-
-    Order detailedOrder = orderDao.findByIdOrder(orderId);
-    detailedOrder.setReceiverName(user.getFullName());
-    detailedOrder.setReceiverEmail(user.getEmail());
-    detailedOrder.setReceiverMobile(user.getMobile());
-    detailedOrder.setReceiverGender(user.getGender());
-
-    String paymentMethod = request.getParameter("paymentMethod");
-    String email = user.getEmail();
-    String subject = "Order Confirmation";
-    String body = "Thank you for your order.";
-
-    JSONObject qrData = null;
-    String qrCodeUrl = null;
-
-    if ("payOnDelivery".equals(paymentMethod)) {
-        detailedOrder.setStatus("Submitted");
-        body += "\n\nYour order will be delivered to your address. Please pay on delivery.";
-        request.setAttribute("order", detailedOrder);
-        orderDao.updateOrderStatus(orderId, "Submitted");
-    } else if ("qrPayment".equals(paymentMethod)) {
-        detailedOrder.setStatus("Submitted");
-        body += "\n\nPlease use the following QR code to complete your payment.";
-        body += "\n\nPayment Information:\nBank Account: 42710000772390"; // Add actual payment info here
-
-        qrData = new JSONObject();
-        qrData.put("accountNo", "42710000772390");
-        qrData.put("accountName", "Nguyen Hoang Nam");
-        qrData.put("acqId", "970415");
-        qrData.put("addInfo", "Payment for Order ID: " + orderId);
-        qrData.put("amount", totalCost);
-        qrData.put("template", "compact2");
-
-        qrCodeUrl = generateQrCode(qrData);
-
-        body += "\n\nQR Code: " + qrCodeUrl;
-        orderDao.updateOrderStatus(orderId, "Submitted");
-    }
-
-    try {
-        EmailSender.sendEmailToConfirmOrder(user.getEmail());
-    } catch (MessagingException ex) {
-        Logger.getLogger(CartCompletionController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    // Xóa sản phẩm khỏi giỏ hàng
-     for (CartItem cartItem : cartItems) {
-        int productId = cartItem.getProductId();
-        try {
-            System.out.println("Deleting cart item: cartId=" + cartId + ", productId=" + productId);
-            cartDetailDAO.deleteCartItemByCartID(cartId, productId);
-        } catch (SQLException ex) {
-            Logger.getLogger(CartCompletionController.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/?error=You must login");
             return;
         }
+
+        int idUser = user.getId();
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        if (cartItems == null || cartItems.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/products");
+            return;
+        }
+
+        int cartId = cartItems.get(0).getCartId();
+
+        double totalCost = 0.0;
+        for (CartItem cartItem : cartItems) {
+            totalCost += cartItem.getTotalPrice();
+        }
+
+        for (CartItem cartItem : cartItems) {
+            int productId = cartItem.getProductId();
+            int quantity = cartItem.getQuantity();
+            productDao.updateProductQuantity(productId, -quantity); // Adjust quantity correctly
+        }
+
+        Order order = new Order();
+        order.setUserId(idUser);
+        order.setReceiverName(user.getFullName());
+        order.setReceiverGender(user.getGender());
+        order.setReceiverEmail(user.getEmail());
+        order.setReceiverMobile(user.getMobile());
+        order.setReceiverAddress(user.getAddress());
+        order.setTotalCost(BigDecimal.valueOf(totalCost));
+        order.setStatus("Submitted"); // Set a default status
+        orderDao.createOrder(order); // Assuming createOrder inserts the order and sets its ID
+
+        int orderId = order.getId(); // Retrieve the generated order ID
+
+        for (CartItem cartItem : cartItems) {
+            Integer productId = cartItem.getProductId();
+            Integer quantity = cartItem.getQuantity();
+            Double totalPrice = cartItem.getTotalPrice();
+
+            if (productId == null || quantity == null || totalPrice == null) {
+                System.out.println("Null values in cartItem: " + cartItem);
+                continue;
+            }
+
+            System.out.println("Creating order item with orderId: " + orderId + ", productId: " + productId + ", quantity: " + quantity + ", totalPrice: " + totalPrice);
+            orderDao.createOrderItem(orderId, productId, quantity, totalPrice);
+        }
+
+        Order detailedOrder = orderDao.findByIdOrder(orderId);
+        detailedOrder.setReceiverName(user.getFullName());
+        detailedOrder.setReceiverEmail(user.getEmail());
+        detailedOrder.setReceiverMobile(user.getMobile());
+        detailedOrder.setReceiverGender(user.getGender());
+        detailedOrder.setReceiverAddress(user.getAddress());
+
+        String paymentMethod = request.getParameter("paymentMethod");
+        String email = user.getEmail();
+        String subject = "Order Confirmation";
+        String body = "Thank you for your order.";
+
+        JSONObject qrData = null;
+        String qrCodeUrl = null;
+
+        if ("payOnDelivery".equals(paymentMethod)) {
+            detailedOrder.setStatus("Submitted");
+            body += "\n\nYour order will be delivered to your address. Please pay on delivery.";
+            request.setAttribute("order", detailedOrder);
+            orderDao.updateOrderStatus(orderId, "Submitted");
+        } else if ("qrPayment".equals(paymentMethod)) {
+            detailedOrder.setStatus("Submitted");
+            body += "\n\nPlease use the following QR code to complete your payment.";
+            body += "\n\nPayment Information:\nBank Account: 42710000772390"; // Add actual payment info here
+
+            qrData = new JSONObject();
+            qrData.put("accountNo", "42710000772390");
+            qrData.put("accountName", "Nguyen Hoang Nam");
+            qrData.put("acqId", "970415");
+            qrData.put("addInfo", "Payment for Order ID: " + orderId);
+            qrData.put("amount", totalCost);
+            qrData.put("template", "compact2");
+
+            qrCodeUrl = generateQrCode(qrData);
+
+            body += "\n\nQR Code: " + qrCodeUrl;
+            orderDao.updateOrderStatus(orderId, "Submitted");
+        }
+
+        try {
+            EmailSender.sendEmailToConfirmOrder(user.getEmail());
+        } catch (MessagingException ex) {
+            Logger.getLogger(CartCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Xóa sản phẩm khỏi giỏ hàng
+        for (CartItem cartItem : cartItems) {
+            int productId = cartItem.getProductId();
+            try {
+                System.out.println("Deleting cart item: cartId=" + cartId + ", productId=" + productId);
+                cartDetailDAO.deleteCartItemByCartID(cartId, productId);
+            } catch (SQLException ex) {
+                Logger.getLogger(CartCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error");
+                return;
+            }
+        }
+
+        session.removeAttribute("cartItems"); // Clear the cart after order is placed
+
+        request.setAttribute("order", detailedOrder);
+        request.setAttribute("qrCodeUrl", qrCodeUrl);
+        request.getRequestDispatcher("/screens/CartCompletion.jsp").forward(request, response);
     }
-
-    session.removeAttribute("cartItems"); // Clear the cart after order is placed
-
-    request.setAttribute("order", detailedOrder);
-    request.setAttribute("qrCodeUrl", qrCodeUrl);
-    request.getRequestDispatcher("/screens/CartCompletion.jsp").forward(request, response);
-}
-
 
     private String generateQrCode(JSONObject qrData) {
         String urlString = "https://api.vietqr.io/v2/generate";
@@ -195,22 +199,16 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                     }
 
                     JSONObject responseJson = new JSONObject(response.toString());
-                    if (responseJson.has("data") && responseJson.getJSONObject("data").has("qrDataURL")) {
-                        return responseJson.getJSONObject("data").getString("qrDataURL");
-                    }
+                    String qrCodeUrl = responseJson.getString("imgURL");
+                    return qrCodeUrl;
                 }
             } else {
-                throw new IOException("Unexpected response code: " + responseCode);
+                System.out.println("Failed to generate QR code: " + connection.getResponseMessage());
             }
         } catch (IOException e) {
-            Logger.getLogger(CartCompletionController.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
         }
-        return null;
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Handle GET requests if needed
-        request.getRequestDispatcher("/screens/CartCompletion.jsp").forward(request, response);
+        return null;
     }
 }

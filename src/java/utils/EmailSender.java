@@ -93,8 +93,9 @@ public class EmailSender {
 
         MimeMultipart multipart = new MimeMultipart("related");
         BodyPart messageBodyPart = new MimeBodyPart();
-        String htmlText = "<H1>Thanh toán Online quét mã QR : </H1>";
+        String htmlText = "<H1>Pay for your order online by scanning the QR code provided below: </H1>";
         htmlText += "<img src=\"http://drive.google.com/uc?id=19PtgPN0scwIH2D_ZqHHiKnJJanQn3LYn\">";
+        String htmlText2 = "<H2>TechStore thanks for your order! </H2>";
         messageBodyPart.setContent(htmlText, "text/html");
         multipart.addBodyPart(messageBodyPart);
         try {

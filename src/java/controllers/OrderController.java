@@ -40,7 +40,7 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) (session != null ? session.getAttribute("user") : null);
 
-        if (user == null || (!user.getRole().equals("Sale") && !user.getRole().equals("Sale Manager"))) {
+        if (user == null || (!user.getRole().equals("Sale"))) {
             response.sendRedirect(request.getContextPath() + "/common/unauthorized.jsp");
             return;
         }
@@ -62,7 +62,7 @@ public class OrderController extends HttpServlet {
             List<User> saleUsers = userDAO.findUsersByRole("Sale");
             request.setAttribute("saleUsers", saleUsers);
             request.setAttribute("order", order);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/screens/OrderDetailsSale.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/screens/OrderDetailSale.jsp");
             dispatcher.forward(request, response);
         } catch (NumberFormatException | SQLException e) {
             response.sendRedirect(request.getContextPath() + "/common/error.jsp");
@@ -74,7 +74,7 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) (session != null ? session.getAttribute("user") : null);
 
-        if (user == null || (!user.getRole().equals("Sale") && !user.getRole().equals("Sale Manager"))) {
+        if (user == null || (!user.getRole().equals("Sale"))) {
             response.sendRedirect(request.getContextPath() + "/common/unauthorized.jsp");
             return;
         }
@@ -101,7 +101,7 @@ public class OrderController extends HttpServlet {
 
             order.setStatus(status);
             order.setNotes(notes);
-            order.setSaleUserId(saleUserId);
+            order.setSaleId(saleUserId);
             orderDao.update(order);
 
             response.sendRedirect(request.getContextPath() + "/orderDetails?id=" + orderId);
@@ -110,4 +110,3 @@ public class OrderController extends HttpServlet {
         }
     }
 }
-
